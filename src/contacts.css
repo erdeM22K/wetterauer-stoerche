@@ -1,0 +1,408 @@
+/* ---------- Grundlayout & Theme ---------- */
+:root {
+  --bg: #111;
+  --text: #f5f5f5;
+  --muted: #c7c7c7;
+  --line: #666;
+  --accent: #f4a32b;
+  --accent-hover: #d98b19;
+  --focus: #ffffff;
+  --radius: 8px;
+  --max-width: 1200px;
+  --gap: 50px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+}
+
+/* ---------- Überschrift ---------- */
+#contact-heading {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-size: 36px;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+/* ---------- Haupt-Layout ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+  max-width: var(--max-width);
+  margin: 0 auto 100px auto;
+  padding: 0 40px;
+  align-items: stretch; /* beide Seiten gleich hoch */
+}
+
+/* ---------- Linke Spalte ---------- */
+#left-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.googlemap iframe {
+  width: 100%;
+  height: 350px;
+  border: none;
+  border-radius: var(--radius);
+}
+
+.download-head {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+#left-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#left-section li + li {
+  margin-top: 8px;
+}
+
+#left-section a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+#left-section a:hover {
+  color: var(--accent);
+}
+
+.adresse {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.adresse p {
+  margin: 0 0 4px 0;
+}
+
+.adresse p:last-child {
+  margin-bottom: 0;
+}
+
+.adresse a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.adresse a:hover {
+  color: var(--accent-hover);
+}
+
+
+/* ---------- Rechte Spalte (Formular) ---------- */
+#right-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Formular oben, Button unten */
+  padding-bottom: 10px;
+}
+
+#contactForm {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* Zweispaltige Felder (Vorname / Nachname) */
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.label {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/* Input-Styling */
+input[type="text"],
+input[type="email"] {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--line);
+  color: var(--text);
+  font-size: 16px;
+  padding: 10px 2px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  border-color: var(--focus);
+}
+
+/* Textarea */
+textarea {
+  background: #d9d9d9;
+  color: #111;
+  border: none;
+  border-radius: var(--radius);
+  padding: 12px;
+  min-height: 240px;
+  font-size: 16px;
+  resize: vertical;
+}
+
+/* Datenschutz Checkbox */
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.consent a {
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.consent input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  margin-top: 3px;
+}
+
+/* ---------- Button ---------- */
+.actions {
+  display: flex;
+  justify-content: center; /* Button horizontal zentrieren */
+  align-items: flex-end;    /* unten ausrichten */
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.btn {
+  background: var(--accent);
+  border: none;
+  color: #000;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Button-Erfolgsanimation */
+.btn.success {
+  background: #1dbf73; /* sattes Grün */
+  color: #fff;
+  box-shadow: 0 0 15px rgba(29,191,115,0.6);
+  transform: scale(1.03);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+
+/* ---------- Responsives Verhalten ---------- */
+@media (max-width: 900px) {
+  #contact-heading {
+    font-size: 28px;
+    margin-top: 50px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+    padding: 0 20px;
+  }
+
+  .row-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    justify-content: flex-start; /* Button linksbündig auf kleineren Geräten */
+  }
+}
+
+
+
+/* CSS für Navigation*/
+
+/* ===== NAVBAR ===== */
+:root{
+  --nav-bg: #3a0f72;      /* Lila-Balken wie im Screenshot */
+  --nav-text: #ffffff;
+  --nav-height: 72px;     /* Höhe des Balkens */
+}
+
+.site-header{
+  background: var(--nav-bg);
+  color: var(--nav-text);
+}
+
+.navbar{
+  width: 100%;
+}
+
+.nav-inner{
+  max-width: var(--max-width, 1200px);
+  margin: 0 auto;                /* leichter Außenabstand wie im Mockup */
+  padding: 0 24px;
+  height: var(--nav-height);
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* Brand | Links | CTA */
+  align-items: center;
+  gap: 24px;
+}
+
+/* Brand (Logo + Text) */
+.brand{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--nav-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand-logo{
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: block;
+}
+.brand-text{
+  font-family: "Oswald", sans-serif;
+  line-height: 1.05;
+  letter-spacing: .3px;
+  font-size: 20px;
+}
+
+/* Links mittig */
+.nav-links{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 4vw, 48px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a{
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 700;
+}
+.nav-links a:hover,
+.nav-links a:focus{
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* CTA rechts */
+.nav-cta{
+  background: var(--accent, #f4a32b);
+  color: #231b08;
+  font-weight: 800;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform .06s ease, box-shadow .15s ease, background .15s ease;
+  white-space: nowrap;
+}
+.nav-cta:hover{
+  transform: translateY(-1px);
+  background: #cd8417;
+}
+
+/* ---- Responsiv ---- */
+@media (max-width: 980px){
+  .nav-inner{
+    grid-template-columns: 1fr auto; /* Brand | CTA */
+    grid-template-rows: auto auto;    /* Links in zweite Zeile */
+    height: auto;
+    padding-top: 12px; padding-bottom: 12px;
+    row-gap: 10px;
+  }
+  .nav-links{
+    grid-column: 1 / -1;
+    order: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+}
+@media (max-width: 520px){
+  .brand-text{ font-size: 18px; }
+  .nav-cta{ padding: 9px 14px; }
+}
+
+
+/* --- FOOTER --- */
+.footer {
+  background-color: #000;
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #999;
+}
+
+.socials a {
+  margin: 0 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .nav ul {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .ueberuns-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .aktuelles-container {
+    flex-direction: column;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}
