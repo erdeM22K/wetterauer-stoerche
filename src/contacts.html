@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontakt</title>
+  <link rel="stylesheet" href="contacts.css">
+  <!-- Optional: kondensierte Headline-Schrift (passt zum Look). Entfernen, falls unerwünscht. -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="site-header">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <!-- Brand (Logo + Name) -->
+      <a class="brand" href="/">
+        <!-- Falls du (noch) kein Logo hast, lass das <img> einfach weg -->
+        <img class="brand-logo" src="../images/logo.png" alt="" aria-hidden="true" />
+        <span class="brand-text">
+          <strong>WETTERAUER</strong><br>STOERCHE
+        </span>
+      </a>
+
+      <!-- Hauptnavigation -->
+      <ul class="nav-links" role="list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/ueber-uns">Über uns</a></li>
+        <li><a href="/team">Team</a></li>
+        <li><a href="/spielplan">Spielplan</a></li>
+        <li><a href="/aktuelles">Aktuelles</a></li>
+      </ul>
+
+      <!-- CTA rechts -->
+      <a class="nav-cta" href="/mitglied-werden">Mitglied werden!</a>
+    </div>
+  </nav>
+</header>
+<h2 id="contact-heading" class="visually-hidden">Kontaktformular</h2>
+<section class="grid" aria-labelledby="contact-heading">
+      <!-- Linke Spalte -->
+      <div id="left-section">
+        <div class="googlemap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3599.954786074856!2d8.875264777269194!3d50.356252567495645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sde!2sde!4v1762292428329!5m2!1sde!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <div class="adresse">
+          <p>Dartclub Wetterau 2016 Beienheim e.V.</p>
+          <p>Am Schützenhaus 1</p>
+          <p>61203 Reichelsheim (Wetterau)</p>
+          <p>E-Mail: info@wetterauer-stoerche.de</p>
+        </div>
+
+        <h2 class="download-head">Formulare Download</h2>
+        <!-- Optional: Links zu PDFs (Beispiel) -->
+        <ul>
+          <li><a href="/downloads/mitgliedsantrag.pdf">Mitgliedsantrag (PDF)</a></li>
+          <li><a href="/downloads/satzung.pdf">Satzung (PDF)</a></li>
+        </ul>
+      </div>
+
+      <!-- Rechte Spalte: Formular -->
+      <div id="right-section">
+        <form id="contactForm" action="#" method="post" novalidate>
+          <div class="row-2">
+            <div class="field">
+              <label for="vorname" class="label">Vorname</label>
+              <input id="vorname" name="vorname" type="text" autocomplete="given-name" required minlength="2" />
+            </div>
+
+            <div class="field">
+              <label for="nachname" class="label">Nachname</label>
+              <input id="nachname" name="nachname" type="text" autocomplete="family-name" required minlength="2" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email" class="label">E-Mail</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required />
+          </div>
+
+          <div class="field">
+            <label for="message" class="label">Nachricht</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+
+          <div class="consent">
+            <input id="consent" name="consent" type="checkbox" required />
+            <label for="consent">
+              Ich habe die <a href="/datenschutz">Datenschutzerklärung</a> gelesen und akzeptiere sie.
+            </label>
+          </div>
+          <div class="actions">
+            <button class="btn" type="submit">Absenden!</button>
+          </div>
+        </form>
+      </div>
+</section>
+<!-- FOOTER -->
+  <footer id="kontakt" class="footer">
+    <p>© 2025 Wetterauer Störche</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Datenschutzerklärung</a>
+    </div>
+  </footer>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="contacts.js"></script>
+</body>
+</html>
