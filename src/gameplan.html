@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spielplan</title>
+  <meta name="description" content="Beschreibungstext">
+  <link rel="stylesheet" href="contacts.css">
+</head>
+
+
+<body>
+<header class="site-header">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <!-- Brand (Logo + Name) -->
+      <a class="brand" href="/">
+        <!-- Falls du (noch) kein Logo hast, lass das <img> einfach weg -->
+        <img class="brand-logo" src="../images/logo.png" alt="" aria-hidden="true" />
+        <span class="brand-text">
+          <strong>WETTERAUER</strong><br>STOERCHE
+        </span>
+      </a>
+
+      <!-- Hauptnavigation -->
+      <ul class="nav-links" role="list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/ueber-uns">Über uns</a></li>
+        <li><a href="/team">Team</a></li>
+        <li><a href="gameplan.html">Spielplan</a></li>
+        <li><a href="/aktuelles">Aktuelles</a></li>
+      </ul>
+
+      <!-- CTA rechts -->
+      <a class="nav-cta" href="contacts.html">Mitglied werden!</a>
+    </div>
+  </nav>
+</header>
+
+
+<!-- Spielplan -->
+<h2 class="plan-title">Spielplan</h2>
+<div class="plan-wrap">
+  <div id="plan-status"></div>
+  <!-- Highlight-Karte -->
+  <div id="next-match" class="next-card" hidden></div>
+  <table id="spielplan" class="game-table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+</div>
+</table>
+
+<!-- FOOTER -->
+  <footer id="kontakt" class="footer">
+    <p>© 2025 Wetterauer Störche</p>
+    <div class="socials">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Datenschutzerklärung</a>
+    </div>
+  </footer>
+<script src="gameplan.js"></script>
+</body>
+</html>
