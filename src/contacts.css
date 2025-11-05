@@ -1,5 +1,12 @@
-/* ---------- Grundlayout & Theme ---------- */
+/* === Google Fonts laden (zentral) === */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;600&display=swap');
+
+
+/* ====================================
+   1) Variablen & Basissetup
+==================================== */
 :root {
+  /* Theme */
   --bg: #111;
   --text: #f5f5f5;
   --muted: #c7c7c7;
@@ -10,11 +17,14 @@
   --radius: 8px;
   --max-width: 1200px;
   --gap: 50px;
+
+  /* Navbar */
+  --nav-bg: #3a0f72;
+  --nav-text: #ffffff;
+  --nav-height: 72px;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -24,7 +34,10 @@ body {
   line-height: 1.5;
 }
 
-/* ---------- Überschrift ---------- */
+
+/* ====================================
+   2) Kontaktseite – Überschrift & Grid
+==================================== */
 #contact-heading {
   text-align: center;
   font-family: "Oswald", sans-serif;
@@ -36,7 +49,6 @@ body {
   color: var(--text);
 }
 
-/* ---------- Haupt-Layout ---------- */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -47,7 +59,10 @@ body {
   align-items: stretch; /* beide Seiten gleich hoch */
 }
 
-/* ---------- Linke Spalte ---------- */
+
+/* ====================================
+   3) Kontaktseite – Linke Spalte
+==================================== */
 #left-section {
   display: flex;
   flex-direction: column;
@@ -75,46 +90,33 @@ body {
   margin: 0;
 }
 
-#left-section li + li {
-  margin-top: 8px;
-}
+#left-section li + li { margin-top: 8px; }
 
 #left-section a {
   color: var(--text);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
-#left-section a:hover {
-  color: var(--accent);
-}
+#left-section a:hover { color: var(--accent); }
 
 .adresse {
   font-size: 15px;
   line-height: 1.6;
   color: var(--muted);
 }
-
-.adresse p {
-  margin: 0 0 4px 0;
-}
-
-.adresse p:last-child {
-  margin-bottom: 0;
-}
-
+.adresse p { margin: 0 0 4px 0; }
+.adresse p:last-child { margin-bottom: 0; }
 .adresse a {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-
-.adresse a:hover {
-  color: var(--accent-hover);
-}
+.adresse a:hover { color: var(--accent-hover); }
 
 
-/* ---------- Rechte Spalte (Formular) ---------- */
+/* ====================================
+   4) Kontaktseite – Rechte Spalte (Form)
+==================================== */
 #right-section {
   display: flex;
   flex-direction: column;
@@ -148,7 +150,7 @@ body {
   margin-bottom: 8px;
 }
 
-/* Input-Styling */
+/* Inputs */
 input[type="text"],
 input[type="email"] {
   background: transparent;
@@ -160,10 +162,7 @@ input[type="email"] {
   outline: none;
   transition: border-color 0.2s ease;
 }
-
-input:focus {
-  border-color: var(--focus);
-}
+input:focus { border-color: var(--focus); }
 
 /* Textarea */
 textarea {
@@ -186,13 +185,11 @@ textarea {
   font-size: 14px;
   color: var(--muted);
 }
-
 .consent a {
   color: var(--text);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-
 .consent input {
   width: 18px;
   height: 18px;
@@ -200,10 +197,13 @@ textarea {
   margin-top: 3px;
 }
 
-/* ---------- Button ---------- */
+
+/* ====================================
+   5) Buttons
+==================================== */
 .actions {
   display: flex;
-  justify-content: center; /* Button horizontal zentrieren */
+  justify-content: center;  /* Button horizontal zentrieren */
   align-items: flex-end;    /* unten ausrichten */
   margin-top: auto;
   padding-top: 20px;
@@ -220,7 +220,6 @@ textarea {
   cursor: pointer;
   transition: background 0.2s ease, transform 0.1s ease;
 }
-
 .btn:hover {
   background: var(--accent-hover);
   transform: translateY(-2px);
@@ -236,51 +235,37 @@ textarea {
 }
 
 
-/* ---------- Responsives Verhalten ---------- */
+/* ====================================
+   6) Kontaktseite – Responsive
+==================================== */
 @media (max-width: 900px) {
   #contact-heading {
     font-size: 28px;
     margin-top: 50px;
   }
-
   .grid {
     grid-template-columns: 1fr;
     gap: 60px;
     padding: 0 20px;
   }
-
-  .row-2 {
-    grid-template-columns: 1fr;
-  }
-
-  .actions {
-    justify-content: flex-start; /* Button linksbündig auf kleineren Geräten */
-  }
+  .row-2 { grid-template-columns: 1fr; }
+  .actions { justify-content: flex-start; } /* Button linksbündig mobil */
 }
 
 
-
-/* CSS für Navigation*/
-
-/* ===== NAVBAR ===== */
-:root{
-  --nav-bg: #3a0f72;      /* Lila-Balken wie im Screenshot */
-  --nav-text: #ffffff;
-  --nav-height: 72px;     /* Höhe des Balkens */
-}
-
-.site-header{
+/* ====================================
+   7) Navbar
+==================================== */
+.site-header {
   background: var(--nav-bg);
   color: var(--nav-text);
 }
 
-.navbar{
-  width: 100%;
-}
+.navbar { width: 100%; }
 
-.nav-inner{
-  max-width: var(--max-width, 1200px);
-  margin: 0 auto;                /* leichter Außenabstand wie im Mockup */
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
   padding: 0 24px;
   height: var(--nav-height);
   display: grid;
@@ -290,7 +275,7 @@ textarea {
 }
 
 /* Brand (Logo + Text) */
-.brand{
+.brand {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -298,13 +283,13 @@ textarea {
   text-decoration: none;
   white-space: nowrap;
 }
-.brand-logo{
+.brand-logo {
   width: 42px;
   height: 42px;
   border-radius: 50%;
   display: block;
 }
-.brand-text{
+.brand-text {
   font-family: "Oswald", sans-serif;
   line-height: 1.05;
   letter-spacing: .3px;
@@ -312,7 +297,7 @@ textarea {
 }
 
 /* Links mittig */
-.nav-links{
+.nav-links {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -321,20 +306,20 @@ textarea {
   margin: 0;
   padding: 0;
 }
-.nav-links a{
+.nav-links a {
   color: var(--nav-text);
   text-decoration: none;
   font-weight: 700;
 }
 .nav-links a:hover,
-.nav-links a:focus{
+.nav-links a:focus {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
 
 /* CTA rechts */
-.nav-cta{
-  background: var(--accent, #f4a32b);
+.nav-cta {
+  background: var(--accent);
   color: #231b08;
   font-weight: 800;
   padding: 10px 16px;
@@ -342,23 +327,24 @@ textarea {
   text-decoration: none;
   display: inline-block;
   transition: transform .06s ease, box-shadow .15s ease, background .15s ease;
-  white-space: nowrap;
+  text-align: center;
 }
-.nav-cta:hover{
+.nav-cta:hover {
   transform: translateY(-1px);
   background: #cd8417;
 }
 
-/* ---- Responsiv ---- */
-@media (max-width: 980px){
-  .nav-inner{
-    grid-template-columns: 1fr auto; /* Brand | CTA */
+/* Navbar – Responsive */
+@media (max-width: 980px) {
+  .nav-inner {
+    grid-template-columns: 1fr auto;  /* Brand | CTA */
     grid-template-rows: auto auto;    /* Links in zweite Zeile */
     height: auto;
-    padding-top: 12px; padding-bottom: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     row-gap: 10px;
   }
-  .nav-links{
+  .nav-links {
     grid-column: 1 / -1;
     order: 2;
     justify-content: center;
@@ -366,43 +352,145 @@ textarea {
     gap: 16px 24px;
   }
 }
-@media (max-width: 520px){
-  .brand-text{ font-size: 18px; }
-  .nav-cta{ padding: 9px 14px; }
+@media (max-width: 520px) {
+  .brand-text { font-size: 18px; }
+  .nav-cta { padding: 9px 10px; }
 }
 
 
-/* --- FOOTER --- */
+/* ====================================
+   8) Footer
+==================================== */
 .footer {
   background-color: #000;
   text-align: center;
   padding: 2rem 1rem;
   color: #999;
 }
-
 .socials a {
   margin: 0 1rem;
   color: #fff;
   font-weight: bold;
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .nav ul {
-    flex-direction: column;
-    gap: 1rem;
-  }
 
-  .ueberuns-content {
-    flex-direction: column;
-    text-align: center;
-  }
+/* ====================================
+   9) Spielplan – Tabelle & Layout
+==================================== */
+.plan-title {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-size: 36px;
+  letter-spacing: 1px;
+  margin: 60px 0 24px;
+  color: var(--text);
+}
 
-  .aktuelles-container {
-    flex-direction: column;
-  }
+.plan-wrap {
+  max-width: 1400px;     /* vorher 1200px */
+  width: 95%;            /* nutzt fast die gesamte Bildschirmbreite */
+  margin: 0 auto 100px;  /* mittig mit etwas Abstand unten */
+  padding: 0 10px;       /* minimaler Rand statt 40px */
+}
 
-  .hero h1 {
-    font-size: 2.2rem;
+#plan-status {
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+/* Tabelle */
+.game-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden; /* rounded corners */
+}
+.game-table thead th {
+  font-family: "Oswald", sans-serif;
+  text-align: left;
+  letter-spacing: .02em;
+  padding: 14px 16px;
+  border-bottom: 2px solid #2f2f2f;
+  color: #eaeaea;
+}
+.game-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #222;
+  color: var(--text);
+}
+
+/* Zebra + Hover */
+.game-table tbody tr:nth-child(even) { background: #111; }
+.game-table tbody tr:hover { background: #181818; }
+
+/* Nächste Partie hervorheben */
+.game-table tbody tr.next {
+  background: rgba(244,163,43, .07);
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* Spielplan – Small screens */
+@media (max-width: 900px) {
+  .plan-wrap { padding: 0 20px; }
+  .game-table thead { display: none; }
+  .game-table,
+  .game-table tbody,
+  .game-table tr,
+  .game-table td {
+    display: block;
+    width: 100%;
   }
+  .game-table tr {
+    border-bottom: 1px solid #222;
+    padding: 10px 0;
+  }
+  .game-table td { padding: 8px 12px; }
+  .game-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+}
+
+
+/* ====================================
+   10) Spielplan – Next Match Karte
+==================================== */
+.next-card {
+  max-width: var(--max-width);
+  width: 95%;
+  margin: 0 auto 18px;
+  padding: 14px 16px;
+  background: rgba(244,163,43,.08);
+  border: 1px solid rgba(244,163,43,.35);
+  border-radius: 10px;
+}
+.next-card .title {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  margin: 0 0 6px 0;
+  color: var(--accent);
+}
+.next-card .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: var(--text);
+}
+.next-card .chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
 }
