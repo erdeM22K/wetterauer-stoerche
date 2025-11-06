@@ -9,18 +9,32 @@
 <body>
 
   <!-- HEADER / NAV -->
-  <header class="header">
-    <div class="logo">Wetterauer Störche</div>
-    <nav class="nav">
-      <ul>
-        <li><a href="#aktuelles">Aktuelles</a></li>
-        <li><a href="#ueberuns">Über uns</a></li>
-        <li><a href="#team">Team</a></li>
-        <li><a href="#kontakt">Kontakt</a></li>
+  <header class="site-header">
+  <nav class="navbar">
+    <div class="nav-inner">
+      <!-- Brand (Logo + Name) -->
+      <a class="brand" href="/">
+        <!-- Falls du (noch) kein Logo hast, lass das <img> einfach weg -->
+        <img class="brand-logo" src="../images/logo.png" alt="" aria-hidden="true" />
+        <span class="brand-text">
+          <strong>WETTERAUER</strong><br>STOERCHE
+        </span>
+      </a>
+
+      <!-- Hauptnavigation -->
+      <ul class="nav-links" role="list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/ueber-uns">Über uns</a></li>
+        <li><a href="/team">Team</a></li>
+        <li><a href="gameplan.html">Spielplan</a></li>
+        <li><a href="/aktuelles">Aktuelles</a></li>
       </ul>
-    </nav>
-    <a href="#" class="cta">Mitglied werden</a>
-  </header>
+
+      <!-- CTA rechts -->
+      <a class="nav-cta" href="contacts.html">Mitglied werden!</a>
+    </div>
+  </nav>
+</header>
   <div id="smooth-wrapper">
   <div id="smooth-content">
 

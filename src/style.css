@@ -1,3 +1,6 @@
+/* === Google Fonts laden (zentral) === */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;600&display=swap');
+
 /* --- RESET --- */
 * {
   margin: 0;
@@ -5,14 +8,9 @@
   box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-
-}
-
 /* --- GLOBAL --- */
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", sans-serif;
   color: #fff;
   background-color: #111;
   line-height: 1.6;
@@ -44,8 +42,8 @@ a {
   align-items: center;
   background-color: #000;
   padding: 1rem 2rem;
-position: fixed;
-width: 100%;
+  position: fixed;
+  width: 100%;
   top: 0;
   left: 0;
   z-index: 100;
@@ -90,9 +88,12 @@ width: 100%;
 .hero::after {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0,0,0,0.5);
-backdrop-filter: blur(var(--hero-blur));
+  backdrop-filter: blur(var(--hero-blur));
 }
 
 .hero-content {
@@ -101,29 +102,27 @@ backdrop-filter: blur(var(--hero-blur));
   left: 45%;
   transform: translate(-50%, -50%);
   text-align: left;
-  z-index: 3; /* über Dartboard & Dart */
+  z-index: 3;
   color: white;
-  display: flex;         /* Stellt H1 und IMG nebeneinander */
-  align-items: center;   /* Zentriert sie vertikal zueinander */
-  gap: 2rem;             /* Fügt 2rem Abstand zwischen sie ein */
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .hero-content h1 {
-  font-size: 8vw; /* skaliert mit Bildschirmbreite */
+  font-size: 8vw;
   font-weight: 700;
   text-transform: uppercase;
   line-height: 1.1;
   flex-shrink: 0;
-  text-shadow: 4px 3px 0 #E8AA53;
 }
 
 .logo-title {
   height: 1.2em;
-  width: auto; /* Seitenverhältnis beibehalten */
+  width: auto;
   vertical-align: baseline;
   margin-left: 0.25em;
 }
-
 
 .dartboard-container {
   position: relative;
@@ -135,7 +134,7 @@ backdrop-filter: blur(var(--hero-blur));
   position: absolute;
   width: 100vw;
   height: 100vh;
-  object-fit: cover; /* füllt den ganzen Hintergrund */
+  object-fit: cover;
   top: 0;
   left: 0;
   z-index: 0;
@@ -154,24 +153,20 @@ backdrop-filter: blur(var(--hero-blur));
 .hero .cta {
   background-color: #d94dff;
   color: #fff;
-  /* padding: 0.5rem 1rem; */ /* <-- Entfernen (oder auf 0 setzen) */
   border-radius: 6px;
   font-weight: bold;
   margin-left: 18vh;
   width: 24vh;
   height: 8vh;
-  text-align: center; /* <-- Kann bleiben, wird aber von flex überschrieben */
+  text-align: center;
   font-size: 1.5rem;
-  
-  /* --- HINZUGEFÜGT --- */
   display: flex;
-  align-items: center;     /* Zentriert vertikal */
-  justify-content: center; /* Zentriert horizontal */
+  align-items: center;
+  justify-content: center;
 }
 
 .hero .cta:hover {
-    background-color: #d84dffbb;
-
+  background-color: #d84dffbb;
 }
 
 /* --- AKTUELLES --- */
@@ -179,11 +174,9 @@ backdrop-filter: blur(var(--hero-blur));
   background: #fff;
   color: #000;
   text-align: center;
-  padding: 2rem 1rem 3rem 1rem;;
+  padding: 2rem 1rem 3rem 1rem;
   height: 100vh;
 }
-
-
 
 .aktuelles h2 {
   font-size: 8rem;
@@ -220,7 +213,6 @@ backdrop-filter: blur(var(--hero-blur));
   height: 100vh;
 }
 
-
 .ueberuns h2 {
   color: #a965ff;
   font-size: 8rem;
@@ -246,8 +238,6 @@ backdrop-filter: blur(var(--hero-blur));
   padding: 2rem 1rem 3rem 1rem;
   height: 100vh;
 }
-
-
 
 .team-content {
   display: flex;
@@ -283,10 +273,9 @@ backdrop-filter: blur(var(--hero-blur));
 .footer {
   background-color: #000;
   text-align: center;
-padding: 0 1rem 2rem 1rem;
+  padding: 0 1rem 2rem 1rem;
   color: #999;
 }
-
 
 .socials a {
   margin: 0 1rem;
@@ -312,5 +301,149 @@ padding: 0 1rem 2rem 1rem;
 
   .hero h1 {
     font-size: 2.2rem;
+  }
+}
+
+/* ====================================
+   7) Navbar
+   =================================== */
+:root {
+  /* Theme */
+  --bg: #111;
+  --text: #f5f5f5;
+  --muted: #c7c7c7;
+  --line: #666;
+  --accent: #f4a32b;
+  --accent-hover: #d98b19;
+  --focus: #ffffff;
+  --radius: 8px;
+  --max-width: 1200px;
+  --gap: 50px;
+
+  /* Navbar */
+  --nav-bg: #3a0f72;
+  --nav-text: #ffffff;
+  --nav-height: 72px;
+}
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3a0f72;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.navbar {
+  width: 100%;
+}
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: var(--nav-height);
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Brand (Logo + Text) */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--nav-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: block;
+}
+
+.brand-text {
+  font-family: "Oswald", sans-serif;
+  line-height: 1.05;
+  letter-spacing: .3px;
+  font-size: 20px;
+}
+
+/* Links mittig */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 4vw, 48px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* CTA rechts */
+.nav-cta {
+  background: var(--accent);
+  color: #231b08;
+  font-weight: 800;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform .06s ease, box-shadow .15s ease, background .15s ease;
+  text-align: center;
+}
+
+.nav-cta:hover {
+  transform: translateY(-1px);
+  background: #cd8417;
+}
+
+/* Navbar – Responsive */
+@media (max-width: 980px) {
+  .nav-inner {
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    row-gap: 10px;
+  }
+
+  .nav-links {
+    grid-column: 1 / -1;
+    order: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .brand-text {
+    font-size: 18px;
+  }
+
+  .nav-cta {
+    padding: 9px 10px;
   }
 }
