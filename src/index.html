@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <!-- HEADER / NAV -->
   <header class="header">
     <div class="logo">Wetterauer Störche</div>
@@ -20,11 +21,19 @@
     </nav>
     <a href="#" class="cta">Mitglied werden</a>
   </header>
+  <div id="smooth-wrapper">
+  <div id="smooth-content">
 
   <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Wetterauer<br>Störche</h1>
+      <h1>Wetterauer<br>Störche <img src="/images/logo.png" alt="logo" class="logo-title"  /></h1>
+      <a href="#" class="cta">Mitglied werden</a>
+
+    </div>
+        <div class="dartboard-container">
+      <img src="/images/dartboard.png" alt="Dartboard" class="dartboard"  />
+      <img src="/images/dartpfeil.png" alt="Dartpfeil" class="dart"  />
     </div>
   </section>
 
@@ -67,6 +76,7 @@
     </div>
   </section>
 
+
   <!-- FOOTER -->
   <footer id="kontakt" class="footer">
     <p>© 2025 Wetterauer Störche</p>
@@ -75,5 +85,17 @@
       <a href="#">Facebook</a>
     </div>
   </footer>
+
+  </div> 
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<!-- ScrollSmoother requires ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
