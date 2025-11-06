@@ -110,3 +110,47 @@
 
 }); // Ende des DOMContentLoaded Listeners
 
+
+//Für SektionScroll von anderen Seiten aus (Contacts oder Gameplan)
+window.addEventListener('load', () => {
+  // Prüfen, ob URL einen Hash enthält
+  if (window.location.hash) {
+    const hash = window.location.hash;
+    const target = document.querySelector(hash);
+    if (target) {
+      const headerOffset = 70;
+      const elementPosition = target.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      // Sofort auf 0 scrollen, um Sprung zu verhindern
+      window.scrollTo(0, 0);
+
+      // Dann smooth scrollen
+      setTimeout(() => {
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }, 10); // Kurzes Delay, 10ms reicht
+    }
+  }
+});
+
+// Smooth scroll für interne Links auf der Seite
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (!target) return;
+    const headerOffset = 70;
+    const elementPosition = target.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  });
+});
+
+

@@ -12,7 +12,7 @@
   <nav class="navbar">
     <div class="nav-inner">
       <!-- Brand (Logo + Name) -->
-      <a class="brand" href="/">
+      <a class="brand" href="index.html#hero">
         <!-- Falls du (noch) kein Logo hast, lass das <img> einfach weg -->
         <img class="brand-logo" src="../images/logo.png" alt="" aria-hidden="true" />
         <span class="brand-text">
@@ -22,11 +22,11 @@
 
       <!-- Hauptnavigation -->
       <ul class="nav-links" role="list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/ueber-uns">Über uns</a></li>
-        <li><a href="/team">Team</a></li>
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="index.html#aktuelles">Aktuelles</a></li>
+        <li><a href="index.html#ueberuns">Über uns</a></li>
+        <li><a href="index.html#team">Team</a></li>
         <li><a href="gameplan.html">Spielplan</a></li>
-        <li><a href="/aktuelles">Aktuelles</a></li>
       </ul>
 
       <!-- CTA rechts -->
@@ -98,11 +98,16 @@
   <footer id="kontakt" class="footer">
     <p>© 2025 Wetterauer Störche</p>
     <div class="socials">
-      <a href="#">Instagram</a>
-      <a href="#">Facebook</a>
-      <a href="#">Datenschutzerklärung</a>
+      <a href="https://www.instagram.com/wetterauer.stoerche.dv/">Instagram</a>
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutzerklärung</a>
     </div>
   </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<!-- ScrollSmoother requires ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="contacts.js"></script>
 </body>

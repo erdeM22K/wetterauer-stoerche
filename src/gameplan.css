@@ -1,0 +1,408 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;600&display=swap');
+
+/* ====================================
+   1) Variablen & Basissetup
+==================================== */
+:root {
+  /* Theme */
+  --bg: #111;
+  --text: #f5f5f5;
+  --muted: #c7c7c7;
+  --line: #666;
+  --accent: #f4a32b;
+  --accent-hover: #d98b19;
+  --focus: #ffffff;
+  --radius: 8px;
+  --max-width: 1200px;
+  --gap: 50px;
+
+  /* Navbar */
+  --nav-bg: #3a0f72;
+  --nav-text: #ffffff;
+  --nav-height: 72px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+}
+
+/* ====================================
+   2) Buttons
+==================================== */
+.actions {
+  display: flex;
+  justify-content: center;  /* Button horizontal zentrieren */
+  align-items: flex-end;    /* unten ausrichten */
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.btn {
+  background: var(--accent);
+  border: none;
+  color: #000;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* Button-Erfolgsanimation */
+.btn.success {
+  background: #1dbf73; /* sattes Grün */
+  color: #fff;
+  box-shadow: 0 0 15px rgba(29,191,115,0.6);
+  transform: scale(1.03);
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+
+/* ====================================
+   3) Navbar
+==================================== */
+.site-header {
+  background: var(--nav-bg);
+  color: var(--nav-text);
+}
+
+.navbar { width: 100%; }
+
+.nav-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+  height: var(--nav-height);
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* Brand | Links | CTA */
+  align-items: center;
+  gap: 24px;
+}
+
+/* Brand (Logo + Text) */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--nav-text);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: block;
+}
+.brand-text {
+  font-family: "Oswald", sans-serif;
+  line-height: 1.05;
+  letter-spacing: .3px;
+  font-size: 20px;
+}
+
+/* Links mittig */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 4vw, 48px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links a {
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 700;
+}
+.nav-links a:hover,
+.nav-links a:focus {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* CTA rechts */
+.nav-cta {
+  background: var(--accent);
+  color: #231b08;
+  font-weight: 800;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform .06s ease, box-shadow .15s ease, background .15s ease;
+  text-align: center;
+}
+.nav-cta:hover {
+  transform: translateY(-1px);
+  background: #cd8417;
+}
+
+/* Navbar – Responsive */
+@media (max-width: 980px) {
+  .nav-inner {
+    grid-template-columns: 1fr auto;  /* Brand | CTA */
+    grid-template-rows: auto auto;    /* Links in zweite Zeile */
+    height: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    row-gap: 10px;
+  }
+  .nav-links {
+    grid-column: 1 / -1;
+    order: 2;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+  }
+}
+@media (max-width: 520px) {
+  .brand-text { font-size: 18px; }
+  .nav-cta { padding: 9px 10px; }
+}
+
+
+/* ====================================
+   4) Footer
+==================================== */
+.footer {
+  background-color: #000;
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #999;
+}
+.socials a {
+  margin: 0 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+
+
+/* ====================================
+   5) Spielplan – Tabelle & Layout
+==================================== */
+.plan-title {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-size: 36px;
+  letter-spacing: 1px;
+  margin: 60px 0 24px;
+  color: var(--text);
+}
+
+.plan-wrap {
+  max-width: 1400px;     /* vorher 1200px */
+  width: 95%;            /* nutzt fast die gesamte Bildschirmbreite */
+  margin: 0 auto 100px;  /* mittig mit etwas Abstand unten */
+  padding: 0 10px;       /* minimaler Rand statt 40px */
+}
+
+#plan-status {
+  color: var(--muted);
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+/* Tabelle */
+.game-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  overflow: hidden; /* rounded corners */
+}
+.game-table thead th {
+  font-family: "Oswald", sans-serif;
+  text-align: left;
+  letter-spacing: .02em;
+  padding: 14px 16px;
+  border-bottom: 2px solid #2f2f2f;
+  color: #eaeaea;
+}
+.game-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #222;
+  color: var(--text);
+}
+
+/* Zebra + Hover */
+.game-table tbody tr:nth-child(even) { background: #111; }
+.game-table tbody tr:hover { background: #181818; }
+
+/* Nächste Partie hervorheben */
+.game-table tbody tr.next {
+  background: rgba(244,163,43, .07);
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+/* Spielplan – Small screens */
+@media (max-width: 900px) {
+  .plan-wrap { padding: 0 20px; }
+  .game-table thead { display: none; }
+  .game-table,
+  .game-table tbody,
+  .game-table tr,
+  .game-table td {
+    display: block;
+    width: 100%;
+  }
+  .game-table tr {
+    border-bottom: 1px solid #222;
+    padding: 10px 0;
+  }
+  .game-table td { padding: 8px 12px; }
+  .game-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-family: "Oswald", sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+}
+
+/* ====================================
+   6) Loader Overlay (Spielplan)
+==================================== */
+#plan-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* dunkles Overlay, damit es zum Theme passt */
+  background: rgba(10, 10, 12, 0.75);
+  z-index: 9999;
+  transition: opacity 250ms ease, visibility 250ms;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* hidden-state */
+#plan-loader[hidden] {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* inner box leicht transparent, abgerundet */
+#plan-loader .loader-inner {
+  text-align: center;
+  padding: 16px 20px;
+  border-radius: calc(var(--radius) - 2px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  min-width: 220px;
+}
+
+/* Spinner: benutzt die --accent Farbe */
+#plan-loader .spinner {
+  width: 46px;
+  height: 46px;
+  border: 4px solid rgba(255,255,255,0.06);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 10px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Text passt zur Theme-Farbe */
+#plan-loader .loader-text {
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* sanfter Rahmen um die Box (subtiler Accent-Glow) */
+#plan-loader .loader-inner {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6), 0 0 18px rgba(244,163,43,0.06);
+}
+
+/* ===== Skeleton (falls verwendet) ===== */
+/* dezenter Accent-Shimmer für das Skeleton, sehr niedrig deckend */
+#spielplan-skeleton td,
+.skeleton-row {
+  height: 48px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.02) 0%,
+    rgba(255,255,255,0.04) 40%,
+    rgba(255,255,255,0.02) 100%
+  );
+  position: relative;
+  overflow: hidden;
+  /* Accent-Overlay */
+  box-shadow: inset 0 0 0 1px rgba(244,163,43,0.02);
+  animation: shimmer 1.2s linear infinite;
+}
+
+/* Accent-Ton im Shimmer (sehr dezent) */
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* falls du die Tabelle während Laden leicht abdunkeln willst */
+#spielplan.loading { opacity: 0.78; pointer-events: none; filter: blur(0.2px); }
+
+/* kleine Accessibility-Verbesserung: Fokus-Ring wenn sichtbar */
+#plan-loader:focus-within .loader-inner {
+  outline: 3px solid rgba(244,163,43,0.12);
+  outline-offset: 4px;
+}
+
+
+
+/* ====================================
+   7) Spielplan – Next Match Karte
+==================================== */
+.next-card {
+  max-width: var(--max-width);
+  width: 95%;
+  margin: 0 auto 18px;
+  padding: 14px 16px;
+  background: rgba(244,163,43,.08);
+  border: 1px solid rgba(244,163,43,.35);
+  border-radius: 10px;
+}
+.next-card .title {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  margin: 0 0 6px 0;
+  color: var(--accent);
+}
+.next-card .meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  color: var(--text);
+}
+.next-card .chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+}
