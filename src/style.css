@@ -9,6 +9,14 @@
 }
 
 /* --- GLOBAL --- */
+html {
+cursor: url('/images/dartcursor_small.cur'), auto;
+}
+
+a, button:hover {
+  cursor: url('/images/dartpointer_small.cur'), auto;
+}
+
 body {
   font-family: "Inter", sans-serif;
   color: #fff;
