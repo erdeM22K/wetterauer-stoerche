@@ -241,7 +241,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 })();
 
 
-
 //Script für "Team" auf LandingPage
 document.addEventListener("DOMContentLoaded", () => {
   const members = document.querySelectorAll(".team-member");
