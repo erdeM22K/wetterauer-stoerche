@@ -190,48 +190,190 @@ a {
   text-align: center;
   padding: 1rem;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .aktuelles h2 {
-  font-size: 8rem;
-  margin-bottom: 2rem;
+  font-size: 6rem;
+  color: black;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-size: clamp(3rem, 8vw, 8rem); 
+  margin-bottom: 2.5rem;
+  text-align: center;
 }
 
-.aktuelles-left {
+/* Container für alle Einträge */
+.aktuelles-list {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-
-.news-card {
-  max-width: 300px;
-}
-
-.news-card img {
+  gap: 2rem;
   width: 100%;
-  border-radius: 12px;
+  max-width: 1400px; /* für große Bildschirme */
 }
 
-.arrow {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  cursor: pointer;
-}
-
-.aktuelles-contianer{
+/* Einzelne News-Karte */
+.aktuelles-card {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 90%; /* nimmt auf großen Bildschirmen 90% Breite */
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.aktuelles-right{
-  width: 300px;
-  height: 500px;
-  margin-left: 15rem;
+.aktuelles-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 
+/* Bild links */
+.aktuelles-card__img {
+  flex: 0 0 auto;
+  width: 100%;           /* immer volle Breite innerhalb der Karte */
+  max-width: 250px;      /* Desktop max Breite */
+  height: auto;          /* Höhe automatisch proportional */
+  border-radius: 12px;
+  object-fit: cover;
+  margin-right: 2rem;
+}
+
+/* Inhalt rechts */
+.aktuelles-card__content {
+  text-align: left;
+  flex: 1;
+}
+
+.aktuelles-card__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.aktuelles-card__description {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* --- TABLET-ANSICHT --- */
+@media (max-width: 1024px) {
+
+  .aktuelles {
+    height: auto;
+    padding: 3rem 1rem;
+  }
+
+  .aktuelles h2 {
+    margin: 0;
+    font-size: 4rem;
+  }
+
+  .aktuelles-card {
+    flex-direction: column;
+    width: 90%;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .aktuelles-card__img {
+    width: 100%;     /* volle Breite der Karte */
+    height: auto;    /* Höhe proportional */
+    margin-right: 0;
+    margin-bottom: 1rem;
+    max-width: none;
+  }
+
+  .aktuelles-card__content {
+    text-align: center;
+  }
+}
+
+/* --- IPAD / MITTLERE TABLET / LAPTOP --- */
+@media (min-width: 768px){
+
+  .aktuelles {
+    height: auto;
+    padding: 3rem 2rem;
+  }
+
+  .aktuelles h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .aktuelles-list {
+    gap: 1.5rem;
+  }
+
+  .aktuelles-card {
+    flex-direction: row;      /* Bild links, Text rechts */
+    width: 95%;
+    max-width: 95%;
+    padding: 1.5rem;
+    text-align: left;
+  }
+
+  .aktuelles-card__img {
+    width: 35%;               /* nimmt etwas mehr Platz als Smartphone */
+    max-width: 300px;
+    height: auto;
+    margin-right: 1.5rem;
+  }
+
+  .aktuelles-card__content {
+    text-align: left;
+  }
+
+  .aktuelles-card__title {
+    font-size: 1.4rem;
+  }
+
+  .aktuelles-card__description {
+    font-size: 1rem;
+  }
+}
+
+
+/* --- SMARTPHONE --- */
+@media (max-width: 480px) {
+
+  .aktuelles {
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .aktuelles h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .aktuelles-card {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .aktuelles-card__img {
+    width: 100%;
+    height: auto;   /* proportional */
+    margin: 0;
+  }
+
+  .aktuelles-card__title {
+    font-size: 1.2rem;
+  }
+
+  .aktuelles-card__description {
+    font-size: 0.95rem;
+  }
+}
 
 
 /* --- TABLET-ANSICHT (Breite ca. 769px bis 1024px) --- */
@@ -296,6 +438,7 @@ a {
 
 .ueberuns h2 {
   color: #f4a32b;
+  text-shadow: 0 0 10px rgba(244,163,43,0.5);
   font-size: clamp(3rem, 8vw, 8rem); 
   margin-bottom: 2.5rem;
   text-align: center;
@@ -372,6 +515,12 @@ a {
   }
 }
 
+@media (max-width: 768px){
+  .ueberuns{
+    height: auto;
+  }
+}
+
 @media (max-width: 480px) {
   .ueberuns-content{
     flex-direction: column;
@@ -392,44 +541,199 @@ a {
   }
 }
 
+
 /* --- TEAM --- */
 .team {
-  background: #fff;
-  color: #000;
+  background-color: white;
+  color: #fff;
   text-align: center;
-  padding: 2rem 1rem 3rem 1rem;
-  height: 100vh;
-}
-
-.team-content {
+  padding: 2rem 1rem 4rem 1rem;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .team h2 {
-  font-size: 8rem;
-  margin-bottom: 2rem;
+  font-size: 6rem;
+  color: black;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  font-size: clamp(3rem, 8vw, 8rem); 
+  margin-bottom: 2.5rem;
+  text-align: center;
 }
 
+.team-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 3rem;
+  justify-items: center;
+  align-items: flex-start;
+  padding: 0 2rem;
+}
+
+/* Einzelnes Teammitglied */
 .team-member {
+  position: relative;
   text-align: center;
+  width: 100%;
+  max-width: 500px;
 }
 
 .team-member img {
   width: 150px;
   height: 150px;
-  border-radius: 50%;
-  border: 4px solid #a965ff;
+  border-radius: 5%;
+  border: 2px dotted black;
   object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
 .team-member h3 {
   margin-top: 1rem;
-  color: #a965ff;
+  color: black;
+  font-size: 1.4rem;
+  transition: transform 0.2s ease;
 }
+
+.team-member img:hover {
+  transform: scale(1.05);
+}
+
+/* Infokasten (Standard: hidden) */
+.member-info {
+  background-color: #111111;
+  position: absolute; /* wird per JS umpositioniert */
+  color: #fff;
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  width: 500px;
+  z-index: 20;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Aktiv */
+.member-info.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Infokasten links: großes Bild */
+.member-info-left img {
+  width: 180px;
+  height: 220px;
+  border-radius: 5%;
+  object-fit: cover;
+}
+
+/* Infokasten rechts: Statistiken */
+.member-info-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.member-info-right strong{
+  color: #f4a32b;
+}
+
+.member-info-right h4 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: white;
+  text-shadow: 0 0 15px rgba(217, 139, 25,0.8);
+}
+
+/* Overlay */
+.info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(6px);
+  background-color: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+  z-index: 15;
+}
+
+.info-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Mobile / kleine Geräte: Info wird direkt über dem Bild */
+@media (max-width: 1024px) {
+  .member-info {
+    position: fixed; /* JS setzt die Position direkt auf das Bild */
+    width: 90%;
+    max-width: 400px;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    background: #f8f8f8;
+    color: #111;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .member-info-left img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+
+  .member-info-right {
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px){
+  .team{
+    height: auto;
+  }
+}
+
+/* Sehr kleine Geräte */
+@media (max-width: 480px) {
+  .member-info {
+    position: absolute; /* JS setzt die Position direkt auf das Bild */
+    width: 100%;
+    max-width: 400px;
+    flex-direction: column;
+    padding: 1rem 1.5rem;
+    background: #f8f8f8;
+    color: #111;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .team h2 {
+    font-size: 4rem;
+  }
+
+  .team-member img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .team-member h3 {
+    font-size: 1.1rem;
+  }
+}
+
+
 
 /* ====================================
    8) Footer
@@ -446,29 +750,6 @@ a {
   font-weight: bold;
 }
 
-
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .nav ul {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .ueberuns-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .aktuelles-container {
-    flex-direction: column;
-  }
-
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-}
-
-/* --- RESPONSIVE: Mobile-first Anpassungen --- */
 
 /* Tablets und kleinere Bildschirme */
 @media (max-width: 1024px) {
