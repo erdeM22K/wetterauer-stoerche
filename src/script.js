@@ -10,6 +10,7 @@
     // Wir setzen effects auf 'false', da wir die Parallax manuell mit GSAP steuern
     effects: false 
   });
+  
 
   // 3. Animation für den Dartpfeil (.dart)
   // WICHTIG: Wir fügen 'scroller: smoother.scroller' hinzu,
@@ -50,16 +51,82 @@
     ease: "none"
   });
 
-  gsap.to(".hero", {
+    gsap.to(".dart", {
     scrollTrigger: {
       trigger: ".hero",
-      start: "top top", // Startet, wenn der Hero-Top auf den Viewport-Top trifft
-      end: "bottom 50%",  // Der Blur ist weg, wenn der Hero zur Hälfte gescrollt ist
+      start: "top top",
+      end: "bottom top",
       scrub: true,
     },
-    "--hero-blur": "2px", // Zielwert: kein Blur
-    ease: "none"
+    x: "-20vw",
+    y: "20vh", 
+    rotation: -2,
+    ease: "power2.out"
   });
+
+
+
+/////////////////////////////////////////
+//  --- Ueber uns Bilder Animation --- //
+/////////////////////////////////////////
+
+  const teamFoto = document.querySelector(".ueberuns-left img.teamfoto");
+  let images = [];
+  let currentIndex = 0;
+
+  // --- Fetch Bild-URLs aus Google Sheet ---
+  fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhkv0mLnP_wSeC9n4yrgF9_QINqGDdYnSfC2nC-cNrggjqETlrSCLOT48cgxPtGMmTbuLYieHboahxXZL5lrOcup5gnpcf-PnVagQx4vXxNqc1qBdxNte2hwriwmMUDTIKmU14PNycBcckGU0iPIEgdnXfcP3SQfrlSQ0-pDBn9ML5vbcBf3wXveZdDyQ2KAtEjKLhCIbXmO8vV7GSLNwNoWWQpsGFAyk1SVguHPXgUVpcC2CATtCO-n5MRmm800s2aZaYcVJzBIMKcA26Bc85HtZm6Dg&lib=MbIlc9TiEEKieF6w4ibl9dJ2Ei9Gn_agv")
+    .then(res => res.json())
+    .then(data => {
+      images = data
+        .map(row => row["Über-uns Bild"])
+        .filter(url => url);
+
+      if (!images.length) return;
+
+      // Erstes Bild anzeigen
+      teamFoto.src = images[0];
+
+      // Bildgröße festlegen (optional, falls CSS nicht reicht)
+      teamFoto.style.width = "600px";
+      teamFoto.style.height = "500px";
+      teamFoto.style.objectFit = "cover";
+
+      // Slideshow starten
+      setInterval(nextSlide, 3000);
+    })
+    .catch(err => console.error("Fehler beim Laden der Bilder:", err));
+
+  function nextSlide() {
+    if (!images.length) return;
+
+    const nextIndex = (currentIndex + 1) % images.length;
+    const nextSrc = images[nextIndex];
+
+    // Swipe-out Animation
+    gsap.to(teamFoto, {
+      duration: 0.5,
+      x: -100,
+      opacity: 0,
+      ease: "power2.in",
+      onComplete: () => {
+        teamFoto.src = nextSrc;
+
+        // Swipe-in Animation
+        gsap.fromTo(teamFoto,
+          { x: 100, opacity: 0 },
+          { duration: 0.5, x: 0, opacity: 1, ease: "power2.out" }
+        );
+
+        currentIndex = nextIndex;
+      }
+    });
+  }
+
+
+
+
+
 
 /* gsap.to("body", {
     scrollTrigger: {
@@ -465,7 +532,57 @@ window.addEventListener('load', () => {
     loaderOverlay.style.opacity = '0';
     setTimeout(() => {
       loaderOverlay.remove();
+
+/////////////START ANIMATION ///////////////////////
+      gsap.fromTo(".hero-content", {opacity: 0, x: -100}, {
+        duration: 1.5,
+        opacity: 1,
+        x: 0,
+        ease: "power2.out",
+        onComplete: () => {
+
+          // Jetzt Fade-in-Animation starten
+          gsap.fromTo(".logo-title", {opacity: 0}, {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+                   onComplete: () => {
+
+          // Jetzt Fade-in-Animation starten
+          gsap.fromTo(".cta", {opacity: 0}, {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out"
+          });
+        }
+          });
+        }
+      });
+
+const sections = [".aktuelles", ".ueberuns", ".team"];
+
+sections.forEach(section => {
+  const h2 = document.querySelector(`${section} h2`);
+  if (!h2) return; // existiert noch nicht
+
+  gsap.fromTo(
+    h2,
+    { opacity: 0, y: -60 },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: section,           // startet beim Scrollen in die Sektion
+        start: "top 80%",            // wenn 20% der Sektion sichtbar      
+        end: "top 60%",   
+        scrub: true,                // false = Animation läuft einmal beim Scrollen
+      }
+    }
+  );
+});
+//////////////////////////////////////////////////
     }, 500);
   }, 3500);
 });
-
