@@ -85,6 +85,7 @@ async function loadSpielplan() {
       }).join("");
       return `<tr class="${isUpcoming ? "upcoming" : ""}">${tds}</tr>`;
     }).join("");
+    animateRows();
 
     // Nächstes Spiel finden (erste Zeile mit Klasse upcoming)
     const nextRowEl = tbody.querySelector("tr.upcoming");
@@ -158,3 +159,55 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     history.replaceState(null, "", href);
   });
 });
+
+
+// === GSAP Setup ===
+// (sollte einmal ausgeführt werden; die GSAP-Skripte lädst du ja bereits in HTML)
+if (typeof gsap !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+// --- Hilfsvariable für Timeline (um mehrfaches Animieren sauber zu handhaben) ---
+let _rowsTimeline = null;
+
+/**
+ * animateRows
+ * Animiert alle Zeilen im <tbody> nacheinander von oben nach unten.
+ * Wird nach dem Rendern der Tabelle aufgerufen.
+ */
+function animateRows() {
+  if (!tbody) return;
+
+  // Selektiere nur sichtbare Zeilen (falls du z.B. Skeleton o.Ä. nutzt)
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+  if (!rows.length) return;
+
+  // Timeline vorher killen, falls vorhanden
+  if (_rowsTimeline) {
+    try { _rowsTimeline.kill(); } catch (e) { /* ignore */ }
+    _rowsTimeline = null;
+  }
+
+  // Stellt sicher, dass Zeilen vor der Animation direkt sichtbar/neutral sind
+  gsap.set(rows, { clearProps: "all" }); // entfernt alte inline-styles
+
+  // Erstelle eine neue Timeline mit ScrollTrigger: animiert, wenn die Tabelle in Sicht kommt
+  _rowsTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: table,
+      start: "top 85%",    // passt an: "top 85%" bedeutet: wenn obere Kante der Tabelle 85% von viewport-top erreicht
+      toggleActions: "play none none none",
+      //markers: true, // zum Debuggen aktivieren
+    }
+  });
+
+  // Animation: von oben (y: -20) und transparent -> in Position
+  _rowsTimeline.from(rows, {
+    duration: 0.55,
+    y: -20,
+    opacity: 0,
+    ease: "power2.out",
+    stagger: 0.07,      // Abstand zwischen den Zeilen (gestaffelt)
+    overwrite: true
+  });
+}
