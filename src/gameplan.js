@@ -4,12 +4,11 @@ const API_URL = "https://script.googleusercontent.com/macros/echo?user_content_k
 const statusEl = document.getElementById("plan-status");
 const table = document.getElementById("spielplan");
 const thead = table ? table.querySelector("thead") : null;
-// Falls du ein Skeleton tbody mit id "spielplan-skeleton" verwendest, wähle das echte tbody:
 const tbody = table ? (table.querySelector('tbody:not(#spielplan-skeleton)') || table.querySelector("tbody")) : null;
-const nextBox = document.getElementById("next-match"); // Karte oben
+const nextBox = document.getElementById("next-match");
 
-const loader = document.getElementById("plan-loader");           // Overlay (optional)
-const skeleton = document.getElementById("spielplan-skeleton");  // optional skeleton tbody
+const loader = document.getElementById("plan-loader");
+const skeleton = document.getElementById("spielplan-skeleton");
 
 // ----- Hilfsfunktionen -----
 function formatDE(dStr){
@@ -24,40 +23,21 @@ function toDate(dStr){
 }
 
 function showLoader() {
-  if (loader) {
-    loader.hidden = false;
-    loader.setAttribute("aria-hidden", "false");
-  }
-  if (skeleton) {
-    skeleton.hidden = false;
-    skeleton.setAttribute("aria-hidden", "false");
-  }
-  if (table) {
-    table.classList.add("loading");
-    table.setAttribute("aria-busy", "true");
-  }
+  if (loader) { loader.hidden = false; loader.setAttribute("aria-hidden", "false"); }
+  if (skeleton) { skeleton.hidden = false; skeleton.setAttribute("aria-hidden", "false"); }
+  if (table) { table.classList.add("loading"); table.setAttribute("aria-busy", "true"); }
   if (statusEl) statusEl.textContent = "Lädt…";
 }
 
 function hideLoader() {
-  if (loader) {
-    loader.hidden = true;
-    loader.setAttribute("aria-hidden", "true");
-  }
-  if (skeleton) {
-    skeleton.hidden = true;
-    skeleton.setAttribute("aria-hidden", "true");
-  }
-  if (table) {
-    table.classList.remove("loading");
-    table.removeAttribute("aria-busy");
-  }
+  if (loader) { loader.hidden = true; loader.setAttribute("aria-hidden", "true"); }
+  if (skeleton) { skeleton.hidden = true; skeleton.setAttribute("aria-hidden", "true"); }
+  if (table) { table.classList.remove("loading"); table.removeAttribute("aria-busy"); }
   if (statusEl) statusEl.textContent = "";
 }
 
 // ----- Laden des Spielplans (async) -----
 async function loadSpielplan() {
-  // Fallbacks: wenn essentielle Elemente fehlen, abbrechen
   if (!table || !thead || !tbody) {
     console.warn("Spielplan-Elemente fehlen (table/thead/tbody).");
     return;
@@ -76,14 +56,19 @@ async function loadSpielplan() {
       return;
     }
 
-    // Spaltenreihenfolge (anpassen falls nötig)
+    // Relevante Spalten
     const cols = ["Heim-Team","Gast-Team","Tag","Datum","Ergebnis"];
+
+    // Filter: nur Zeilen mit Inhalt in mindestens einer relevanten Spalte
+    const filteredRows = rows.filter(r => 
+      cols.some(c => r[c] !== undefined && r[c] !== null && r[c].toString().trim() !== "")
+    );
 
     // Kopfzeile
     thead.innerHTML = `<tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr>`;
 
     // sortieren nach Datum (aufsteigend)
-    const data = rows.slice().sort(
+    const data = filteredRows.slice().sort(
       (a,b) => (toDate(a["Datum"])||0) - (toDate(b["Datum"])||0)
     );
 
@@ -96,7 +81,6 @@ async function loadSpielplan() {
       const isUpcoming = d && d >= today;
       const tds = cols.map(c => {
         const val = c === "Datum" ? formatDE(r[c]) : (r[c] ?? "");
-        // data-label für responsive Tabellen
         return `<td data-label="${c}">${val}</td>`;
       }).join("");
       return `<tr class="${isUpcoming ? "upcoming" : ""}">${tds}</tr>`;
@@ -136,9 +120,7 @@ async function loadSpielplan() {
   } catch (err) {
     console.error("Fehler beim Laden des Spielplans:", err);
     if (statusEl) statusEl.textContent = "Fehler beim Laden des Spielplans.";
-    // optional: tbody.innerHTML = '<tr><td colspan="5">Fehler beim Laden</td></tr>';
   } finally {
-    // kleine Verzögerung für bessere UX (optional)
     setTimeout(hideLoader, 200);
   }
 }
@@ -146,8 +128,7 @@ async function loadSpielplan() {
 // Startet das Laden beim Skript-Aufruf
 loadSpielplan();
 
-// ----- Smooth Scroll: Links auf derselben Seite & Scroll-to-Hash beim Laden -----
-// Funktion zum Smooth-Scrollen zu einem Ziel mit Header-Offset
+// ----- Smooth Scroll: interne Links -----
 function smoothScrollToHash(hash, headerOffset = 70) {
   if (!hash) return;
   const target = document.querySelector(hash);
@@ -157,36 +138,23 @@ function smoothScrollToHash(hash, headerOffset = 70) {
   window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
 }
 
-// Wenn die Seite mit einem Hash geladen wird (z.B. von anderer Seite index.html#ueberuns)
 window.addEventListener('load', () => {
   if (window.location.hash) {
-    // Verhindere kurz den Browser-Sprung (setzt Ansicht oben), dann smooth scrollen
-    // Nur wenn das Ziel existiert
     const hash = window.location.hash;
     const target = document.querySelector(hash);
     if (target) {
-      // Sofort nach oben setzen, damit der Browser-Sprung nicht sichtbar ist
       window.scrollTo(0, 0);
-      // Kleines Delay, dann smooth scrollen
-      setTimeout(() => {
-        smoothScrollToHash(hash, 70);
-      }, 10);
+      setTimeout(() => { smoothScrollToHash(hash, 70); }, 10);
     }
   }
 });
 
-// Smooth scroll für interne Links auf der Seite (nur hrefs die mit # beginnen)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
-    // Falls der Link einen leeren Hash hat (href="#"), ignoriere
     const href = this.getAttribute('href');
     if (!href || href === "#") return;
-
-    // Wenn der Link auf ein Ziel auf derselben Seite verweist -> preventDefault + smooth scroll
-    // (dies verhindert nicht Links, die z.B. auf index.html#... zeigen, da diese nicht mit '#' beginnen)
     e.preventDefault();
     smoothScrollToHash(href, 70);
-    // optional: update URL ohne springen
     history.replaceState(null, "", href);
   });
 });

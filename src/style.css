@@ -552,13 +552,13 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
 }
 
 .team h2 {
-  font-size: 6rem;
+  font-size: clamp(3rem, 8vw, 8rem);
   color: black;
   text-shadow: 0 0 10px rgba(0,0,0,0.5);
-  font-size: clamp(3rem, 8vw, 8rem); 
   margin-bottom: 2.5rem;
   text-align: center;
 }
@@ -570,24 +570,35 @@ a {
   justify-items: center;
   align-items: flex-start;
   padding: 0 2rem;
+  transition: filter 0.25s ease, opacity 0.25s ease;
 }
 
-/* Einzelnes Teammitglied */
+/* Blur state when modal open */
+.team-content.blur {
+  filter: blur(6px) saturate(.9);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.9;
+}
+
+/* Einzelnes Teammitglied (Karte) */
 .team-member {
   position: relative;
   text-align: center;
   width: 100%;
   max-width: 500px;
+  cursor: pointer;
 }
 
-.team-member img {
+.team-member .avatar {
   width: 150px;
   height: 150px;
   border-radius: 5%;
   border: 2px dotted black;
   object-fit: cover;
-  cursor: pointer;
   transition: transform 0.2s ease;
+  display: block;
+  margin: 0 auto;
 }
 
 .team-member h3 {
@@ -597,42 +608,75 @@ a {
   transition: transform 0.2s ease;
 }
 
-.team-member img:hover {
-  transform: scale(1.05);
+.team-member .avatar:hover { transform: scale(1.05); }
+
+/* Hidden info template inside card (kept for accessibility) */
+.team-member .member-info {
+  display: none;
 }
 
-/* Infokasten (Standard: hidden) */
-.member-info {
+/* Overlay (backdrop) */
+.info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(0px);
+  background-color: rgba(0,0,0,0.0);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, background-color 0.25s ease;
+  z-index: 50;
+}
+
+.info-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(0,0,0,0.45);
+  backdrop-filter: blur(2px);
+}
+
+/* Modal Info (re-uses .member-info styles but centered and visible) */
+.modal-info {
   background-color: #111111;
-  position: absolute; /* wird per JS umpositioniert */
   color: #fff;
   display: flex;
   gap: 1.5rem;
   padding: 1rem 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  width: min(900px, 92%);
+  max-width: 1000px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.98);
+  z-index: 60;
   opacity: 0;
   visibility: hidden;
-  width: 500px;
-  z-index: 20;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  align-items: flex-start;
 }
 
-/* Aktiv */
-.member-info.active {
+/* show modal */
+.modal-info[aria-hidden="false"] {
   opacity: 1;
   visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
 }
 
-/* Infokasten links: großes Bild */
-.member-info-left img {
-  width: 180px;
-  height: 220px;
+/* Left: big image */
+.member-info-left img,
+.modal-info .member-info-left img {
+  width: 220px;
+  height: 260px;
   border-radius: 5%;
   object-fit: cover;
+  display: block;
 }
 
-/* Infokasten rechts: Statistiken */
+/* Right: stats */
 .member-info-right {
   display: flex;
   flex-direction: column;
@@ -640,6 +684,7 @@ a {
   text-align: left;
   font-size: 1rem;
   line-height: 1.5;
+  max-width: calc(100% - 240px);
 }
 
 .member-info-right strong{
@@ -647,90 +692,42 @@ a {
 }
 
 .member-info-right h4 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   color: white;
   text-shadow: 0 0 15px rgba(217, 139, 25,0.8);
 }
 
-/* Overlay */
-.info-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(6px);
-  background-color: rgba(0,0,0,0.4);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
-  z-index: 15;
+/* Close button */
+.modal-close {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  z-index: 70;
 }
 
-.info-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-/* Mobile / kleine Geräte: Info wird direkt über dem Bild */
+/* Mobile responsiveness */
 @media (max-width: 1024px) {
-  .member-info {
-    position: fixed; /* JS setzt die Position direkt auf das Bild */
-    width: 90%;
-    max-width: 400px;
+  .modal-info {
+    width: 92%;
+    max-width: 720px;
     flex-direction: column;
-    padding: 1rem 1.5rem;
-    background: #f8f8f8;
-    color: #111;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    padding: 1rem;
   }
-
-  .member-info-left img {
-    width: 100%;
-    height: auto;
-    border-radius: 0;
-  }
-
-  .member-info-right {
-    text-align: center;
-    margin-top: 1rem;
-  }
+  .modal-info .member-info-left img { width: 100%; height: auto; border-radius: 6px; }
+  .member-info-right { text-align: center; max-width: 100%; margin-top: 0.6rem; }
 }
 
-@media (max-width: 768px){
-  .team{
-    height: auto;
-  }
-}
-
-/* Sehr kleine Geräte */
 @media (max-width: 480px) {
-  .member-info {
-    position: absolute; /* JS setzt die Position direkt auf das Bild */
-    width: 100%;
-    max-width: 400px;
-    flex-direction: column;
-    padding: 1rem 1.5rem;
-    background: #f8f8f8;
-    color: #111;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-  .team h2 {
-    font-size: 4rem;
-  }
-
-  .team-member img {
-    width: 120px;
-    height: 120px;
-  }
-
-  .team-member h3 {
-    font-size: 1.1rem;
-  }
+  .team h2 { font-size: 4rem; }
+  .team-member .avatar { width: 120px; height: 120px; }
+  .member-info-right h4 { font-size: 1.25rem; }
 }
 
 

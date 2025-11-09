@@ -154,8 +154,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-//Script für "Aktuelles" auf landingpage:
-
+/////////////////////////////////////////////////////
+//  --- Script für "Aktuelles" auf landingpage --- //
+/////////////////////////////////////////////////////
 (async function() {
   // === ERSETZE DIES mit deiner Apps-Script-Webapp-URL ===
   const API_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhkv0mLnP_wSeC9n4yrgF9_QINqGDdYnSfC2nC-cNrggjqETlrSCLOT48cgxPtGMmTbuLYieHboahxXZL5lrOcup5gnpcf-PnVagQx4vXxNqc1qBdxNte2hwriwmMUDTIKmU14PNycBcckGU0iPIEgdnXfcP3SQfrlSQ0-pDBn9ML5vbcBf3wXveZdDyQ2KAtEjKLhCIbXmO8vV7GSLNwNoWWQpsGFAyk1SVguHPXgUVpcC2CATtCO-n5MRmm800s2aZaYcVJzBIMKcA26Bc85HtZm6Dg&lib=MbIlc9TiEEKieF6w4ibl9dJ2Ei9Gn_agv';
@@ -269,5 +270,202 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".member-info.active").forEach(i => i.classList.remove("active"));
     overlay.classList.remove("active");
   });
+});
+
+
+
+
+////////////////////////////////////////////
+//  --- Team-Sektion aus GoogleSheets --- //
+////////////////////////////////////////////
+(async function(){
+  const API_URL = "https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhkv0mLnP_wSeC9n4yrgF9_QINqGDdYnSfC2nC-cNrggjqETlrSCLOT48cgxPtGMmTbuLYieHboahxXZL5lrOcup5gnpcf-PnVagQx4vXxNqc1qBdxNte2hwriwmMUDTIKmU14PNycBcckGU0iPIEgdnXfcP3SQfrlSQ0-pDBn9ML5vbcBf3wXveZdDyQ2KAtEjKLhCIbXmO8vV7GSLNwNoWWQpsGFAyk1SVguHPXgUVpcC2CATtCO-n5MRmm800s2aZaYcVJzBIMKcA26Bc85HtZm6Dg&lib=MbIlc9TiEEKieF6w4ibl9dJ2Ei9Gn_agv";
+
+  const safe = v => (v === undefined || v === null) ? "" : String(v);
+
+  const teamContent = document.getElementById("team-content");
+  const overlay = document.getElementById("info-overlay");
+  const modal = document.getElementById("modal-info");
+  const modalAvatar = document.getElementById("modal-avatar");
+  const modalName = document.getElementById("modal-name");
+  const modalWalkon = document.getElementById("modal-walkon");
+  const modalDob = document.getElementById("modal-dob");
+  const modalDart = document.getElementById("modal-dart");
+  const modalTown = document.getElementById("modal-hometown");
+  const modalHigh = document.getElementById("modal-high");
+  const modalRole = document.getElementById("modal-role");
+  const modalClose = document.getElementById("modal-close");
+
+  // === relevante Spalten für Team-Mitglieder ===
+  const wantedHeaders = [
+    "Profilbild", "Name", "Spitzname", "Walk-On Music",
+    "Date of Birth", "Dart Used", "Hometown", "Highest Score", "Rolle"
+  ];
+
+  // fetch from API
+  let data = [];
+  try {
+    const res = await fetch(API_URL, { cache: "no-cache" });
+    if (!res.ok) throw new Error("Netzwerk: " + res.status);
+    data = await res.json();
+    if (!Array.isArray(data)) {
+      console.error("API returned non-array:", data);
+      data = [];
+    }
+  } catch (err) {
+    console.error("Fehler beim Laden der Teamdaten:", err);
+    teamContent.innerHTML = "<p style='color:#333'>Fehler beim Laden der Teamdaten (Konsole).</p>";
+    return;
+  }
+  console.log("Fetched data:", data);
+
+  // Filter: nur Zeilen, die tatsächlich Team-Mitglieder enthalten
+  data = data
+    .map(member => {
+      const filtered = {};
+      wantedHeaders.forEach(h => { filtered[h] = member[h]; });
+      return filtered;
+    })
+    .filter(member => member["Name"]);
+
+  if (data.length === 0) {
+    teamContent.innerHTML = "<p style='color:#333'>Keine Teamdaten gefunden.</p>";
+    return;
+  }
+
+  // Create cards
+  data.forEach(member => {
+    const card = document.createElement("div");
+    card.className = "team-member";
+    
+    // avatar
+    const img = document.createElement("img");
+    img.className = "avatar";
+    const pic = safe(member["Profilbild"]);
+    img.src = pic || ("data:image/svg+xml;utf8," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><rect width='100%' height='100%' fill='#e9e9e9'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='#bdbdbd' font-size='24'>kein Bild</text></svg>`));
+    img.alt = safe(member["Name"]) + " Profilbild";
+
+    // visible name under avatar
+    const nameEl = document.createElement("h3");
+    nameEl.textContent = safe(member["Name"]) || safe(member["Spitzname"]) || "Unbekannt";
+
+    // click behavior -> open modal
+    card.addEventListener("click", () => openModal(member));
+
+    // hidden info node (accessibility)
+    const hiddenInfo = document.createElement("div");
+    hiddenInfo.className = "member-info";
+    hiddenInfo.setAttribute("aria-hidden", "true");
+    hiddenInfo.innerHTML = `<div class="member-info-left"><img src="${img.src}" alt=""/></div>
+                            <div class="member-info-right">
+                              <h4>${safe(member["Name"])} ${safe(member["Spitzname"]) ? '"' + safe(member["Spitzname"]) + '"' : ""}</h4>
+                            </div>`;
+
+    card.appendChild(img);
+    card.appendChild(nameEl);
+    card.appendChild(hiddenInfo);
+    teamContent.appendChild(card);
+  });
+
+  // Modal open
+  function openModal(member) {
+  modalAvatar.src = safe(member["Profilbild"]) || modalAvatar.src;
+  modalAvatar.alt = safe(member["Name"]) + " Profilbild";
+  modalName.textContent = safe(member["Name"]); // optional Spitzname entfernen, falls alles im Namen enthalten
+  modalWalkon.textContent = safe(member["Walk-On Music"]);
+
+  // Nur das Datum anzeigen, ohne Uhrzeit
+  const dob = member["Date of Birth"];
+  if (dob) {
+    const d = new Date(dob);
+    modalDob.textContent = isNaN(d) ? dob : d.toLocaleDateString('de-DE');
+  } else {
+    modalDob.textContent = "";
+  }
+
+  modalDart.textContent = safe(member["Dart Used"]);
+  modalTown.textContent = safe(member["Hometown"]);
+  modalHigh.textContent = safe(member["Highest Score"]);
+  modalRole.textContent = safe(member["Rolle"]);
+
+  overlay.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+  teamContent.classList.add("blur");
+  modalClose.focus();
+}
+
+  // Close modal
+  function closeModal(){
+    overlay.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    teamContent.classList.remove("blur");
+  }
+
+  overlay.addEventListener("click", closeModal);
+  modalClose.addEventListener("click", closeModal);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
+
+})();
+
+
+////////////////////////////////////////
+//  --- Landingpage Ladeanimation --- //
+////////////////////////////////////////
+window.addEventListener('load', () => {
+  // Overlay erstellen
+  const loaderOverlay = document.createElement('div');
+  loaderOverlay.id = 'loader-overlay';
+  loaderOverlay.style.position = 'fixed';
+  loaderOverlay.style.top = '0';
+  loaderOverlay.style.left = '0';
+  loaderOverlay.style.width = '100%';
+  loaderOverlay.style.height = '100%';
+  loaderOverlay.style.backgroundColor = '#fff';
+  loaderOverlay.style.display = 'flex';
+  loaderOverlay.style.flexDirection = 'column';
+  loaderOverlay.style.justifyContent = 'center';
+  loaderOverlay.style.alignItems = 'center';
+  loaderOverlay.style.zIndex = '9999';
+
+  // Logo erstellen
+  const logo = document.createElement('img');
+  logo.src = '../images/logo.png';
+  logo.alt = 'Logo';
+  logo.id = 'loader-logo';
+  logo.style.animation = 'loader-pulse 1.5s infinite';
+
+  loaderOverlay.appendChild(logo);
+  document.body.appendChild(loaderOverlay);
+
+  // CSS Animation + responsive Logo
+  const style = document.createElement('style');
+  style.textContent = `
+    #loader-logo {
+      width: 520px;
+      height: 400px;
+    }
+    @keyframes loader-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+    @media (max-width: 768px) {
+      #loader-logo {
+        width: 320px;
+        height: 200px;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Overlay nach 2.5 Sekunden ausblenden
+  setTimeout(() => {
+    loaderOverlay.style.transition = 'opacity 0.5s';
+    loaderOverlay.style.opacity = '0';
+    setTimeout(() => {
+      loaderOverlay.remove();
+    }, 500);
+  }, 3500);
 });
 

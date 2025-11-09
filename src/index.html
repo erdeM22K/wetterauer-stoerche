@@ -70,65 +70,47 @@
       </div>
       <div class=ueberuns-right>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et neque vel libero aliquam efficitur. 
+        Curabitur non felis vel libit amet, consectetur adipiscing elit. Pellentesque et neque vel libero aliquam efficitur. 
         Curabitur non felis vel liberot, consectetur adipiscing elit. Pellentesque et neque vel libero aliquam efficitur. 
+        Curabitur non felis vel liberoit amet, consectetur adipiscing elit. Pellentesque et neque vel libero aliquam efficitur. 
+        Curabitur non felis vel liberot, consectetur adipiscing elit. Pellentesque et neque vel libero aliquam efficitur. 
+        Curabitur non felis vel liberoerot, consectetur adipiscing elit. Pellentesque et neque vel libero aliquam efficitur. 
         Curabitur non felis vel libero </p>
       </div>
     </div>
   </section>
 
-<!-- TEAM -->
+<!-- TEAM (dynamisch, Daten aus Google Sheet) -->
 <section id="team" class="team">
-  <div class="info-overlay"></div>
+  <div class="info-overlay" id="info-overlay"></div>
   <h2>Team</h2>
-  <div class="team-content">
-    
-    <div class="team-member">
-      <img src="../images/foto-guy.jpg" alt="Daniel">
-      <h3>Daniel</h3>
-      <div class="member-info">
-        <div class="member-info-left">
-          <img src="../images/foto-guy.jpg" alt="Daniel Passfoto">
-        </div>
-        <div class="member-info-right">
-          <h4>Daniel "The Rocket"</h4>
-          <p><strong>Walk-On Music:</strong> Thunderstruck</p>
-          <p><strong>Date of Birth:</strong> 12.03.1990</p>
-          <p><strong>Dart Used:</strong> Unicorn Phase 5</p>
-          <p><strong>Hometown:</strong> Marburg</p>
-          <p><strong>Highest Score:</strong> 180</p>
-          <p><strong>Rolle:</strong> Gay</p>
-        </div>
-      </div>
+
+  <div class="team-content" id="team-content">
+    <!-- JS füllt hier die .team-member Elemente -->
+  </div>
+
+  <!-- Modal / Popup (wird per JS befüllt) -->
+  <div id="modal-info" class="member-info modal-info" aria-hidden="true">
+    <button id="modal-close" class="modal-close" aria-label="Schließen">✕</button>
+    <div class="member-info-left">
+      <img id="modal-avatar" src="" alt="Profilbild">
     </div>
-
-    <div class="team-member">
-      <img src="../images/foto-guy.jpg" alt="Vanessa">
-      <h3>Vanessa</h3>
-      <div class="member-info">
-        <div class="member-info-left">
-          <img src="../images/foto-guy.jpg" alt="Vanessa Passfoto">
-        </div>
-        <div class="member-info-right">
-          <h4>Vanessa "The Arrow"</h4>
-          <p><strong>Walk-On Music:</strong> Eye of the Tiger</p>
-          <p><strong>Date of Birth:</strong> 22.07.1992</p>
-          <p><strong>Dart Used:</strong> Target Pro</p>
-          <p><strong>Hometown:</strong> Gießen</p>
-          <p><strong>Highest Score:</strong> 177</p>
-          <p><strong>Rolle:</strong> Gay</p>
-        </div>
-      </div>
+    <div class="member-info-right">
+      <h4 id="modal-name">Name</h4>
+      <p><strong>Walk-On Music:</strong> <span id="modal-walkon"></span></p>
+      <p><strong>Date of Birth:</strong> <span id="modal-dob"></span></p>
+      <p><strong>Dart Used:</strong> <span id="modal-dart"></span></p>
+      <p><strong>Hometown:</strong> <span id="modal-hometown"></span></p>
+      <p><strong>Highest Score:</strong> <span id="modal-high"></span></p>
+      <p><strong>Rolle:</strong> <span id="modal-role"></span></p>
     </div>
-
-    <!-- weitere Team-Mitglieder hier ... -->
-
   </div>
 </section>
 
 
   <!-- FOOTER -->
   <footer id="kontakt" class="footer">
-    <p>© 2025 Wetterauer Störche</p>
+    <p>©2025 by Erdem Kardas & Dennis Bezusov</p>
     <div class="socials">
       <a href="https://www.instagram.com/wetterauer.stoerche.dv/">Instagram</a>
       <a href="impressum.html">Impressum</a>
