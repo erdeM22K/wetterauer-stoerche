@@ -481,6 +481,8 @@ document.addEventListener("DOMContentLoaded", () => {
 //  --- Landingpage Ladeanimation --- //
 ////////////////////////////////////////
 window.addEventListener('load', () => {
+    // --- Scrollen vorübergehend deaktivieren ---
+  document.body.style.overflow = 'hidden';
   // Overlay erstellen
   const loaderOverlay = document.createElement('div');
   loaderOverlay.id = 'loader-overlay';
@@ -528,10 +530,12 @@ window.addEventListener('load', () => {
 
   // Overlay nach 2.5 Sekunden ausblenden
   setTimeout(() => {
+
     loaderOverlay.style.transition = 'opacity 0.5s';
     loaderOverlay.style.opacity = '0';
     setTimeout(() => {
       loaderOverlay.remove();
+       document.body.style.overflow = ''; // Scrollen wieder erlauben
 
 /////////////START ANIMATION ///////////////////////
       gsap.fromTo(".hero-content", {opacity: 0, x: -100}, {
