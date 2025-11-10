@@ -544,6 +544,48 @@ window.addEventListener('load', () => {
         x: 0,
         ease: "power2.out",
         onComplete: () => {
+// Setze den Startzustand (links außen, unsichtbar)
+  gsap.set(".dart-title-animation", {
+    x: "1150px", // Beginnt links außerhalb des Bildschirms
+    /* rotate: -45, */
+    opacity: 0 
+  });
+
+  // Erstelle die Timeline
+  const tl = gsap.timeline({
+    delay: 1 // Warte 1 Sekunde vor dem Start
+  });
+
+  // --- Animation 1: Der ununterbrochene Flug (DAS IST NEU) ---
+  // Diese Animation bewegt den Pfeil mit konstanter Geschwindigkeit
+  // von ganz links nach ganz rechts.
+  tl.to(".dart-title-animation", {
+    duration: 1, // Der GESAMTE Flug dauert 3 Sekunden
+    x: "-300px", // Endposition rechts außerhalb
+/*     rotate: -35, */
+    
+    // !!! WICHTIG: "ease: 'none'" bedeutet konstante Geschwindigkeit.
+    // Kein Abbremsen, kein Beschleunigen. Das ist dein "durchfliegen".
+    ease: "none" 
+  });
+
+  // --- Animation 2: Das Einblenden (überlappend) ---
+  // Diese Animation startet GLEICHZEITIG mit dem Flug (wegen "<")
+  // und blendet den Pfeil am Anfang ein.
+  tl.to(".dart-title-animation", {
+    duration: 0.5, // Braucht 0.5 Sek. zum Einblenden
+    opacity: 0.5,
+    ease: "power1.in"
+  }, "<"); // "<" = Starte gleichzeitig mit dem Anfang von Animation 1
+
+  // --- Animation 3: Das Ausblenden (überlappend) ---
+  // Diese Animation startet 1.8 Sekunden NACHDEM der Flug begonnen hat.
+  // Da der Flug 3 Sek. dauert, fadet er für die letzten 1.2 Sek. aus.
+  tl.to(".dart-title-animation", {
+    duration: 0.2, // Braucht 1.2 Sek. zum Ausblenden
+    opacity: 0,
+    ease: "power1.out"
+  }, "<0.7"); // "<1.8" = Starte 1.8s nach Beginn der Timeline
 
           // Jetzt Fade-in-Animation starten
           gsap.fromTo(".logo-title", {opacity: 0}, {
@@ -557,7 +599,9 @@ window.addEventListener('load', () => {
             opacity: 1,
             y: 0,
             ease: "power2.out"
+             
           });
+          
         }
           });
         }

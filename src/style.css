@@ -150,6 +150,29 @@ a {
   z-index: 0;
 }
 
+.dart-title-animation {
+  position: absolute;
+  z-index: 10; /* Legt den Pfeil über den Titel (z-index: 1) */
+  transform: rotate(17deg);
+  
+  /* !!! WICHTIG: Passe 'top' an! 
+    Dieser Wert bestimmt, auf welcher Höhe der Pfeil fliegt. 
+    Du musst hier einen Wert (z.B. 80px) finden, der
+    genau über deinem "Wetterauer Störche" Text liegt.
+  */
+  top: 350px; 
+  
+  /* Startet am linken Rand (GSAP übernimmt von hier) */
+  left: 0; 
+
+  /* Beispielgröße - passe sie an dein Bild an */
+  width: 150px; 
+  height: auto;
+  
+  /* Startet unsichtbar (GSAP blendet es ein) */
+  opacity: 0; 
+}
+
 /* Dein Card-Wrapper */
 .cta-wrapper {
   display: flex;
@@ -230,6 +253,9 @@ a {
 
 /* === MOBILE-ANPASSUNGEN (bis 767px) === */
 @media (max-width: 767px) {
+  .dart-title-animation {
+    display: none;
+  }
   
   /* 1. Text und Überschrift komplett ausblenden */
   .cta-wrapper .content p,
@@ -266,6 +292,9 @@ a {
 
 /* === TABLET-ANPASSUNGEN (bis 1024px) === */
 @media (max-width: 1025px) {
+    .dart-title-animation {
+    display: none;
+  }
   .cta-wrapper {
     width: 80%; 
     height: auto; 
