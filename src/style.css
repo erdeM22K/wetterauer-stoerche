@@ -181,7 +181,7 @@ a {
     Du musst hier einen Wert (z.B. 80px) finden, der
     genau über deinem "Wetterauer Störche" Text liegt.
   */
-  top: 350px; 
+  top: 250px; 
   
   /* Startet am linken Rand (GSAP übernimmt von hier) */
   left: 0; 
