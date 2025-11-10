@@ -553,7 +553,7 @@ window.addEventListener('load', () => {
                    onComplete: () => {
 
           // Jetzt Fade-in-Animation starten
-          gsap.fromTo(".cta", {opacity: 0}, {
+          gsap.fromTo(".cta-wrapper", {y: -200, opacity: 0}, {
             opacity: 1,
             y: 0,
             ease: "power2.out"
