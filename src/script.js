@@ -2,6 +2,8 @@
  document.addEventListener("DOMContentLoaded", (event) => {
   gsap.registerPlugin(ScrollTrigger,ScrollSmoother)
 
+  
+
   // 2. ScrollSmoother Instanz erstellen
   let smoother = ScrollSmoother.create({
     wrapper: '#smooth-wrapper',
@@ -11,7 +13,7 @@
     effects: false 
   });
   
-
+gsap.set(".hero-content", { xPercent: -50, yPercent: -50 });
   // 3. Animation für den Dartpfeil (.dart)
   // WICHTIG: Wir fügen 'scroller: smoother.scroller' hinzu,
   // damit ScrollTrigger weiß, dass es den Smoother überwachen soll.
@@ -673,8 +675,10 @@ window.addEventListener('load', () => {
           gsap.fromTo(".cta-wrapper", {y: -200, opacity: 0}, {
             opacity: 1,
             y: 0,
-            ease: "power2.out"
-             
+            ease: "power2.out",
+             onComplete: () => {
+                ScrollTrigger.refresh();
+            }
           });
           
         }
