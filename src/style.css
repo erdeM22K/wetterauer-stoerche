@@ -11,6 +11,16 @@
 /* --- GLOBAL --- */
 html {
 cursor: url('/images/dartcursor2_small.cur'), auto;
+user-select: none;
+    
+    /* Für ältere Browser (Safari, Chrome) */
+    -webkit-user-select: none; 
+    
+    /* Für ältere Browser (Firefox) */
+    -moz-user-select: none;    
+    
+    /* Für IE/Edge */
+    -ms-user-select: none;
 }
 
 a, button, .team-member:hover {
@@ -122,6 +132,7 @@ a {
   vertical-align: baseline;
   margin-left: 0.25em;
   opacity: 0;
+  cursor: crosshair;
 }
 
 .dartboard-container {
@@ -148,6 +159,16 @@ a {
   left: 70%;
   transform: rotate(5deg);
   z-index: 0;
+}
+
+
+.flying-dart {
+    position: absolute;
+    width: 100px; /* Breite deines Pfeilbilds */
+    height: 20px; /* Höhe deines Pfeilbilds */
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: 11; /* Sicherstellen, dass sie über allem in der Bühne sind */
 }
 
 .dart-title-animation {

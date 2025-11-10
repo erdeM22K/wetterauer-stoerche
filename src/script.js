@@ -64,7 +64,82 @@
     ease: "power2.out"
   });
 
+// 1. Wichtige Elemente auswählen
+const logo = document.querySelector('.logo-title');
+const container = document.querySelector('.dart-stage'); // Unsere "Bühne"
 
+// 2. Klick-Event auf das LOGO legen
+logo.addEventListener('click', (event) => {
+
+    // 3. Einen neuen Pfeil (als Bild) erstellen
+    const dart = document.createElement('img');
+    dart.src = '/images/dartpfeil.png';
+    dart.className = 'flying-dart';
+
+    container.appendChild(dart);
+
+    // 4. Positionen berechnen
+    const containerRect = container.getBoundingClientRect();
+    const targetX = event.clientX - containerRect.left;
+    const targetY = event.clientY - containerRect.top;
+    const targetYOffset = targetY - 10; // (für 20px Pfeilhöhe / 2)
+
+    // 5. Startposition & Winkel (ANGEPASST)
+    
+    // *** ÄNDERUNG HIER: ***
+    // Starte rechts außerhalb der Bühne
+    const startX = container.offsetWidth + 2550; 
+    
+    // Starte unten außerhalb der Bühne (bleibt gleich)
+    const startY = container.offsetHeight + 100; 
+
+    const deltaX = targetX - startX;
+    const deltaY = targetYOffset - startY;
+    const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI) +180;
+
+    // 6. Die GSAP-Animation (Restlicher Code ist identisch)
+    gsap.fromTo(dart, {
+        // VON:
+        x: startX,
+        y: startY,
+        rotation: angle
+    }, {
+        // ZU:
+        x: targetX,
+        y: targetYOffset,
+        rotation: angle,
+        duration: 0.4,
+        ease: 'power2.in',
+
+        // Wird ausgelöst, wenn der Pfeil gelandet ist
+        onComplete: () => {
+            // Startet die Wackel-Animation
+            gsap.to(dart, {
+                rotation: angle + 2,
+                duration: 0.1,
+                yoyo: true,
+                repeat: 3,
+                ease: 'power1.inOut',
+
+                // Wird ausgelöst, NACHDEM das Wackeln fertig ist
+                onComplete: () => {
+                    // Blendet den Pfeil aus und entfernt ihn
+                    gsap.to(dart, {
+                        opacity: 0,
+                        duration: 0.5, // Dauer des Ausblendens
+                        delay: 0.5, // 1 Sekunde WARTEN (wie in deinem Code)
+
+                        // Am Ende des Ausblendens...
+                        onComplete: () => {
+                            // ...entferne den Pfeil aus dem HTML
+                            dart.remove();
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
 
 /////////////////////////////////////////
 //  --- Ueber uns Bilder Animation --- //
