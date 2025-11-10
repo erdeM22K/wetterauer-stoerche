@@ -1,5 +1,5 @@
 /* === Google Fonts laden (zentral) === */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&family=Poppins:ital,wght@0,400;0,700;0,800;1,700;1,800&display=swap');
 
 
 /* ====================================
@@ -30,7 +30,8 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Inter", sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
   line-height: 1.5;
 }
 
@@ -257,7 +258,10 @@ textarea {
    7) Navbar
 ==================================== */
 .site-header {
-  background: var(--nav-bg);
+ background: #3a0f7249;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.014);
   color: var(--nav-text);
 }
 
