@@ -211,3 +211,40 @@ function animateRows() {
     overwrite: true
   });
 }
+
+// WARTEN, bis das gesamte HTML-Dokument (DOM) geladen ist
+document.addEventListener("DOMContentLoaded", (event) => {
+  
+  // --- START: Hamburger Menü Code ---
+  const hamburgerButton = document.getElementById('hamburger-button');
+  const siteHeader = document.querySelector('.site-header');
+  const navLinks = document.querySelector('.nav-links'); // Wir brauchen die Links
+
+  if (hamburgerButton && siteHeader && navLinks) {
+    
+    // Haupt-Toggle-Funktion
+    const toggleMenu = () => {
+      const isExpanded = siteHeader.classList.toggle('menu-open');
+      hamburgerButton.setAttribute('aria-expanded', isExpanded);
+    };
+    
+    // Klick auf den Button öffnet/schließt das Menü
+    hamburgerButton.addEventListener('click', toggleMenu);
+
+    // Klick auf einen Menü-Link (im offenen Menü) schließt das Menü
+    // Nützlich für On-Page-Navigation (z.B. #aktuelles)
+    navLinks.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' && siteHeader.classList.contains('menu-open')) {
+        toggleMenu();
+      }
+    });
+  }
+  // --- ENDE: Hamburger Menü Code ---
+
+
+  // Dein bestehender GSAP-Code beginnt hier...
+  gsap.registerPlugin(ScrollTrigger,ScrollSmoother)
+
+  // ... (Rest deiner script.js-Datei)
+  
+}); // Ende des DOMContentLoaded Listeners

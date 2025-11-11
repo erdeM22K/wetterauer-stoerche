@@ -79,6 +79,11 @@ body {
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.014);
   color: var(--nav-text);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 .navbar { width: 100%; }
@@ -279,6 +284,10 @@ body {
     color: var(--muted);
     margin-bottom: 3px;
   }
+
+  body{
+    padding-top: 3rem;
+  }
 }
 
 /* ====================================
@@ -409,4 +418,143 @@ body {
   border-radius: 999px;
   background: #141414;
   border: 1px solid #2a2a2a;
+}
+
+
+/* ====================================
+   9) Hamburger Menü Stile
+==================================== */
+
+/* 1. Stile für den Hamburger-Button */
+.hamburger-toggle {
+  display: none; /* Auf Desktop standardmäßig versteckt */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001; /* Stellt sicher, dass er über dem Menü-Hintergrund liegt */
+  
+  /* Positionierung im Grid (wird unten bei < 980px aktiv) */
+  grid-column: 3; /* Rechte Spalte */
+  grid-row: 1;
+  justify-self: end; /* Rechtsbündig in seiner Zelle */
+}
+
+.hamburger-toggle .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: var(--nav-text, #ffffff); /* Verwendet deine Navbar-Textfarbe */
+  transition: all 0.3s ease-in-out;
+}
+
+/* 2. Responsive Logik (ersetzt das bisherige Wrap-Verhalten) */
+@media (max-width: 980px) {
+
+  /* A. Grid anpassen: Brand | Leerraum | Button */
+  /* Dies überschreibt die bestehenden 980px-Regeln für .nav-inner */
+  .nav-inner {
+    grid-template-columns: auto 1fr auto; 
+    grid-template-rows: auto; /* Zurücksetzen */
+    height: var(--nav-height); /* Höhe wieder festlegen */
+    padding-top: 0; 
+    padding-bottom: 0; 
+    row-gap: 0;
+  }
+
+  /* B. Hamburger-Button auf Mobilgeräten anzeigen */
+  .hamburger-toggle {
+    display: block;
+  }
+
+  /* C. Desktop-Links und CTA standardmäßig verstecken */
+  .nav-links,
+  .nav-cta {
+    display: none;
+  }
+  
+  /* D. Bestehende 980px-Regeln für .nav-links zurücksetzen */
+  /* (damit sie nicht mehr wrappen) */
+  .nav-links {
+    grid-column: auto;
+    order: 0;
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  /* 3. Das geöffnete Menü (wenn .menu-open aktiv ist) -- NEUE LOGIK */
+
+  /* A. Mache den GANZEN Header 100% hoch */
+  .site-header.menu-open {
+    height: 100vh; /* 100% der Viewport-Höhe */
+    /* Der Blur-Hintergrund von .site-header wird jetzt auf 100vh gestreckt */
+  }
+
+  /* B. Ändere das .nav-inner-Layout, um Inhalt zu verteilen */
+  .site-header.menu-open .nav-inner {
+    height: 100%;
+    display: flex; /* Überschreibt das Grid-Layout */
+    flex-direction: column;
+    
+    /* NEU: Verteilt die Elemente vertikal */
+    justify-content: space-between; 
+    
+    align-items: center; /* Hält alles horizontal zentriert */
+    
+    /* NEU: Padding oben (für Links) und unten (für CTA) */
+    padding-top: calc(var(--nav-height) + 10rem); 
+    padding-bottom: 3rem; /* Sicherer Abstand zum unteren Rand */
+    box-sizing: border-box; /* Stellt sicher, dass Padding funktioniert */
+    text-shadow: 0 0 15px rgba(217, 139, 25,0.8);
+  }
+
+  /* C. Brand (Logo) absolut positionieren (damit es oben bleibt) */
+  .site-header.menu-open .brand {
+    position: absolute;
+    top: 15px; /* Vertikal zentrieren (anpassen) */
+    left: 24px; /* Wie Desktop-Padding */
+  }
+
+  /* D. Hamburger-Button auch absolut positionieren */
+  .site-header.menu-open .hamburger-toggle {
+    position: absolute;
+    top: 10px; /* Vertikal anpassen */
+    right: 14px; /* Horizontal anpassen (ca. Desktop-Padding) */
+  }
+
+  /* E. Zeige die Links als Menü-Items */
+  .site-header.menu-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  /* F. Zeige den CTA-Button (wird von space-between nach unten gedrückt) */
+  .site-header.menu-open .nav-cta {
+    display: block; 
+    margin-top: 2rem;
+    box-shadow: 0 0 15px rgba(255, 206, 132, 0.8);
+  }
+
+  /* G. Links im geöffneten Menü (Styling) */
+  .site-header.menu-open .nav-links li {
+      margin: 0;
+  }
+  .site-header.menu-open .nav-links a {
+      font-size: 1.5rem;
+  }
+
+
+  /* 4. "X"-Animation für den Button (bleibt gleich) */
+  .site-header.menu-open .hamburger-toggle .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .site-header.menu-open .hamburger-toggle .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .site-header.menu-open .hamburger-toggle .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
 }
