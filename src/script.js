@@ -165,12 +165,12 @@ logo.addEventListener('click', (event) => {
       teamFoto.src = images[0];
 
       // Bildgröße festlegen (optional, falls CSS nicht reicht)
-      teamFoto.style.width = "800px";
+      teamFoto.style.width = "600px";
       teamFoto.style.height = "500px";
       teamFoto.style.objectFit = "cover";
 
       // Slideshow starten
-      setInterval(nextSlide, 7500);
+      setInterval(nextSlide, 3000);
     })
     .catch(err => console.error("Fehler beim Laden der Bilder:", err));
 

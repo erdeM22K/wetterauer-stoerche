@@ -160,6 +160,7 @@ a {
   z-index: 0;
 }
 
+
 .flying-dart {
     position: absolute;
     width: 100px; /* Breite deines Pfeilbilds */
@@ -248,6 +249,9 @@ a {
   border: none; /* Sieht oft sauberer aus */
   border-radius: 10px;
   font-weight: bold;
+  
+
+  
   width: 25vh;
   height: 8vh;
   text-align: center;
@@ -265,6 +269,68 @@ a {
   transform: translateY(-1px);
   background: #cd8417;
   box-shadow: 0 0 200px rgba(255, 206, 132, 0.384);
+}
+
+/* === MOBILE-ANPASSUNGEN (bis 767px) === */
+@media (max-width: 767px) {
+  .dart-title-animation {
+    display: none;
+  }
+  
+  /* 1. Text und Überschrift komplett ausblenden */
+  .cta-wrapper .content p,
+  .cta-wrapper .content h3 {
+    display: none;
+  }
+
+  /* 2. Wrapper-Styling entfernen, damit er unsichtbar wird */
+  .cta-wrapper {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: none;
+    width: auto; 
+    height: auto;
+    padding: 0;
+    margin: 5% auto 0 auto; 
+    opacity: 1; 
+  }
+
+  /* 3. Inneren Container aufräumen */
+  .cta-wrapper .content {
+    gap: 0; 
+  }
+
+  /* 4. Button-Größe anpassen (empfohlen) */
+  .cta {
+    width: 60vw; 
+    max-width: 300px; 
+    height: 60px; 
+    font-size: 1.2rem; 
+  }
+}
+
+/* === TABLET-ANPASSUNGEN (bis 1024px) === */
+@media (max-width: 1025px) {
+    .dart-title-animation {
+    display: none;
+  }
+  .cta-wrapper {
+    width: 80%; 
+    height: auto; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 5%;
+  }
+
+  .cta-wrapper .content h3 {
+    /* width: 100%; <-- GELÖSCHT (wird nicht mehr gebraucht) */
+    font-size: 1.6rem;
+  }
+
+  .cta-wrapper .content p {
+    font-size: 1.3rem;
+  }
 }
 
 /* --- AKTUELLES --- */
@@ -348,6 +414,171 @@ a {
   color: #333;
 }
 
+/* --- TABLET-ANSICHT --- */
+@media (max-width: 1024px) {
+
+  .aktuelles {
+    height: auto;
+    padding: 3rem 1rem;
+  }
+
+  .aktuelles h2 {
+    margin: 0;
+    font-size: 4rem;
+  }
+
+  .aktuelles-card {
+    flex-direction: column;
+    width: 90%;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .aktuelles-card__img {
+    width: 100%;     /* volle Breite der Karte */
+    height: auto;    /* Höhe proportional */
+    margin-right: 0;
+    margin-bottom: 1rem;
+    max-width: none;
+  }
+
+  .aktuelles-card__content {
+    text-align: center;
+  }
+}
+
+/* --- IPAD / MITTLERE TABLET / LAPTOP --- */
+@media (min-width: 768px){
+
+  .aktuelles {
+    height: auto;
+    padding: 3rem 2rem;
+  }
+
+  .aktuelles h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .aktuelles-list {
+    gap: 1.5rem;
+  }
+
+  .aktuelles-card {
+    flex-direction: row;      /* Bild links, Text rechts */
+    width: 95%;
+    max-width: 95%;
+    padding: 1.5rem;
+    text-align: left;
+  }
+
+  .aktuelles-card__img {
+    width: 35%;               /* nimmt etwas mehr Platz als Smartphone */
+    max-width: 300px;
+    height: auto;
+    margin-right: 1.5rem;
+  }
+
+  .aktuelles-card__content {
+    text-align: left;
+  }
+
+  .aktuelles-card__title {
+    font-size: 1.4rem;
+  }
+
+  .aktuelles-card__description {
+    font-size: 1rem;
+  }
+}
+
+
+/* --- SMARTPHONE --- */
+@media (max-width: 480px) {
+
+  .aktuelles {
+    height: auto;
+    padding: 2rem 1rem;
+  }
+
+  .aktuelles h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .aktuelles-card {
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .aktuelles-card__img {
+    width: 100%;
+    height: auto;   /* proportional */
+    margin: 0;
+  }
+
+  .aktuelles-card__title {
+    font-size: 1.2rem;
+  }
+
+  .aktuelles-card__description {
+    font-size: 0.95rem;
+  }
+}
+
+
+/* --- TABLET-ANSICHT (Breite ca. 769px bis 1024px) --- */
+@media (max-width: 1024px) {
+
+  #aktuelles h2{
+    margin: 0;
+  }
+  
+  .aktuelles-contianer {
+    flex-direction: column; 
+    gap: 3rem; /* Etwas weniger Abstand */
+  }
+
+  .aktuelles-left {
+    max-width: 80%;
+    min-width: unset;
+  }
+
+  .aktuelles-left img{
+    max-width: 75%;
+    min-width: 75%; 
+  }
+
+  .aktuelles-right{
+    max-width: 80%;
+    max-height: 80%;
+    font-size: 1rem;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .aktuelles-contianer{
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .aktuelles-left{
+    margin-right: 0;
+  }
+
+  .aktuelles-left img{
+    width: 500px;
+    height: auto;
+  }
+
+  .aktuelles-right{
+    font-size: medium;
+  }
+}
 
 /* --- ÜBER UNS --- */
 .ueberuns {
@@ -370,7 +601,7 @@ a {
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   gap: 4rem;
 }
@@ -403,6 +634,63 @@ a {
 .ueberuns-right p {
   max-width: none;
   margin: 0;
+}
+
+/* --- TABLET-ANSICHT (Breite ca. 769px bis 1024px) --- */
+@media (max-width: 1024px) {
+
+  #ueberuns h2{
+    margin: 0;
+  }
+  
+  .ueberuns-content {
+    flex-direction: column; 
+    gap: 3rem; /* Etwas weniger Abstand */
+  }
+
+  .ueberuns-left {
+    max-width: 80%;
+    min-width: unset;
+  }
+
+  .ueberuns-left img{
+    max-width: 75%;
+    min-width: 75%; 
+  }
+
+  .ueberuns-right{
+    max-width: 80%;
+    max-height: 80%;
+    font-size: 1rem;
+    padding: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px){
+  .ueberuns{
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .ueberuns-content{
+    flex-direction: column;
+    gap: 5rem;
+  }
+
+  .ueberuns-left{
+    margin-right: 0;
+  }
+
+  .ueberuns-left img{
+    width: 500px;
+    height: auto;
+  }
+
+  .ueberuns-right{
+    font-size: medium;
+  }
 }
 
 
@@ -521,6 +809,7 @@ a {
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.25s ease, transform 0.25s ease;
+  align-items: flex-start;
 }
 
 /* show modal */
@@ -576,6 +865,24 @@ a {
   z-index: 70;
 }
 
+/* Mobile responsiveness */
+@media (max-width: 1024px) {
+  .modal-info {
+    width: 92%;
+    max-width: 720px;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  .modal-info .member-info-left img { width: 100%; height: auto; border-radius: 6px; }
+  .member-info-right { text-align: center; max-width: 100%; margin-top: 0.6rem; }
+}
+
+@media (max-width: 480px) {
+  .team h2 { font-size: 4rem; }
+  .team-member .avatar { width: 120px; height: 120px; }
+  .member-info-right h4 { font-size: 1.25rem; }
+}
+
 
 /* ====================================
    8) Footer
@@ -592,6 +899,195 @@ a {
   font-weight: bold;
 }
 
+
+/* Tablets und kleinere Bildschirme */
+@media (max-width: 1024px) {
+
+  /* --- HERO --- */
+  .hero-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+    .hero-content img{
+    height: 250px;
+    width: 350px;
+    margin: 4rem 0;
+  }
+
+  .hero h1 {
+    font-size: 8vw;
+  }
+
+  .hero .cta {
+    margin-left: 0;
+    width: auto;
+    height: auto;
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+  }
+
+  .dart {
+    width: 50vw;
+    height: auto;
+    left: 25%;
+  }
+
+  /* --- AKTUELLES --- */
+  .aktuelles-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .aktuelles h2 {
+    font-size: 6rem;
+  }
+
+  .news-card {
+    max-width: 90%;
+  }
+
+  /* --- ÜBER UNS --- */
+  .ueberuns-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ueberuns h2 {
+    font-size: 6rem;
+  }
+
+  .ueberuns p {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  /* --- TEAM --- */
+  .team-content {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .team h2 {
+    font-size: 6rem;
+  }
+
+  .team-member img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .team-member h3 {
+    font-size: 1.2rem;
+  }
+
+  /* --- FOOTER --- */
+  .footer {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Extra kleine Geräte / Smartphones */
+@media (max-width: 480px) {
+
+  .hero-content {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-content img{
+    height: 250px;
+    width: 350px;
+    margin: 4rem 0;
+  }
+
+  .hero h1 {
+    padding: 4rem 0 0 0;
+    font-size: 12vw;
+  }
+
+  .aktuelles h2,
+  .ueberuns h2,
+  .team h2 {
+    font-size: 4rem;
+  }
+
+  .hero .cta {
+    font-size: 1rem;
+    padding: 0.8rem 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .dart {
+    width: 60vw;
+    left: 20%;
+  }
+
+  .news-card {
+    max-width: 95%;
+  }
+
+  .ueberuns p {
+    font-size: 0.9rem;
+  }
+
+  .team-member img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+
+/* --- Sehr kleine Geräte (380px) --- */
+@media (max-width: 380px) {
+
+    .aktuelles h2,
+    .ueberuns h2,
+    .team h2 {
+        font-size: 3rem; 
+    }
+
+    .ueberuns p {
+        font-size: 0.8rem; 
+    }
+    
+    /* --- HERO --- */
+    .hero h1 {
+      margin-top: 1rem;
+      font-size: 10vw; 
+    }
+
+    .hero-content img{
+        height: 180px;
+        width: 280px;
+        margin: 2.5rem 0;
+    }
+    
+    .hero .cta {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .instagram-embed-wrapper {
+        max-width: 95vw; 
+    }
+
+    .team-member img {
+        width: 80px;
+        height: 80px;
+    }
+}
 
 /* ====================================
    7) Navbar
@@ -710,120 +1206,7 @@ a {
   background: #cd8417;
 }
 
-
-/* ---------------------------
-   Konsolidierte Media Queries
-   --------------------------- */
-
-/* --- TABLET & kleinere Bildschirme (bis 1024px) --- */
-@media (max-width: 1024px) {
-  /* HERO */
-  .hero-content {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .hero-content img { height: 250px; width: 350px; }
-  .hero h1 { font-size: 8vw; }
-  .hero .cta {
-    margin-left: 0;
-    width: auto;
-    padding: 1rem 2rem;
-    font-size: 1.3rem;
-  }
-  .dart { width: 50vw; left: 25%; }
-
-  /* AKTUELLES / ÜBER UNS / TEAM - generelle Tablet-Anpassungen */
-  .ueberuns-content,
-  .team-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1rem;
-  }
-
-  /* Überschriften & Cards */
-  .aktuelles, .ueberuns, .team { height: auto; padding: 3rem 1rem; }
-  .aktuelles h2,
-  .ueberuns h2,
-  .team h2 {
-    font-size: 4rem; /* Tablet-Zielgröße */
-    margin: 0rem 0rem 2rem 0rem;
-  }
-
-
-  .news-card,
-  .aktuelles-card {
-    max-width: 90%;
-    width: 90%;
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
-  }
-
-  .aktuelles-card__img,
-  .aktuelles-card__img img {
-    width: 100%;
-    height: auto;
-    margin-right: 0;
-    margin-bottom: 1rem;
-    max-width: none;
-  }
-  .aktuelles-card__content { text-align: center; }
-
-  /* Über uns - Bild und Text */
-  #ueberuns h2 { margin: 0; }
-  .ueberuns-content { flex-direction: column; gap: 3rem; }
-  .ueberuns-left { max-width: 80%; min-width: unset; }
-  .ueberuns-left img { max-width: 75%; min-width: 100%; width: auto; height: auto; max-height: 200px; padding-top: 2rem;}
-  .ueberuns-right {
-    max-width: 80%;
-    max-height: 80%;
-    font-size: 1rem;
-    padding: 0;
-    text-align: center;
-  }
-
-  /* Team */
-  .team-member img { width: 120px; height: 120px; }
-  .team-member h3 { font-size: 1.2rem; }
-
-  /* Modal / member */
-  .modal-info {
-    width: 92%;
-    max-width: 720px;
-    flex-direction: column;
-    padding: 1rem;
-    text-align: center;
-  }
-  .modal-info .member-info-left img { width: 100%; height: auto; border-radius: 6px; }
-  .member-info-right { text-align: center; max-width: 100%; margin-top: 0.6rem; }
-
-  /* Footer */
-  .footer { padding: 2rem 1rem; }
-
-  /* CTA Wrapper (Tablet-spezifisch) */
-  .dart-title-animation { display: none; }
-  .cta-wrapper {
-    width: 80%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    background: none; /* falls mobile behaviour erwünscht */
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
-    padding: 0;
-  }
-  .cta-wrapper .content h3 { font-size: 1.6rem; }
-  .cta-wrapper .content p  { font-size: 1.3rem; }
-}
-
-/* --- NAVBAR (bis 980px) --- */
+/* Navbar – Responsive */
 @media (max-width: 980px) {
   .nav-inner {
     grid-template-columns: 1fr auto;
@@ -833,6 +1216,7 @@ a {
     padding-bottom: 12px;
     row-gap: 10px;
   }
+
   .nav-links {
     grid-column: 1 / -1;
     order: 2;
@@ -842,122 +1226,12 @@ a {
   }
 }
 
-/* --- MOBILE-ANPASSUNGEN (bis 767px) --- */
-@media (max-width: 767px) {
-  /* CTA: Text ausblenden, Wrapper "unsichtbar" machen und Button anpassen */
-  .dart-title-animation { display: none; }
-
-  .cta-wrapper .content p,
-  .cta-wrapper .content h3 {
-    display: none;
-  }
-  .cta-wrapper {
-    background: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
-    width: auto;
-    height: auto;
-    padding: 0;
-    margin: 5% auto 0 auto;
-    opacity: 1;
-  }
-  .cta-wrapper .content { gap: 0; }
-  .cta {
-    width: 60vw;
-    max-width: 300px;
-    height: 60px;
-    font-size: 1.2rem;
-  }
-}
-
-/* --- kleinere Handys / Smartphones (bis 520px) --- */
 @media (max-width: 520px) {
-  .brand-text { font-size: 18px; }
-  .nav-cta { padding: 9px 10px; }
-}
-
-/* --- SMARTPHONES (bis 480px) --- */
-@media (max-width: 480px) {
-  /* HERO */
-  .hero h1 {
-    padding-top: 4rem;
-    font-size: 12vw;
-  }
-  .hero-content img { margin: 1.5rem 0; }
-  .hero .cta { font-size: 1rem; padding: 0.8rem 1.5rem; }
-
-  .dart { width: 60vw; left: 20%; }
-
-  /* Überschriften */
-  .aktuelles h2,
-  .ueberuns h2,
-  .team h2 { font-size: 4rem; }
-
-  /* Cards / Layout */
-  .news-card { max-width: 95%; }
-  .aktuelles-card { width: 100%; gap: 1rem; }
-  .aktuelles-card__img { width: 100%; height: auto; margin: 0; }
-  .aktuelles-card__title { font-size: 1.2rem; }
-  .aktuelles-card__description { font-size: 0.95rem; }
-
-  /* Über uns */
-  .ueberuns-content { flex-direction: column;}
-  .ueberuns-left { margin-right: 0; }
-  .ueberuns-left img { width: 500px; height: auto; } /* ggf. anpassen, falls zu breit */
-  .ueberuns-right { font-size: medium; }
-
-  /* Team / Member */
-  .team-member img { width: 100px; height: 100px; }
-  .team h2 { font-size: 4rem; }
-  .team-member .avatar { width: 120px; height: 120px; }
-  .member-info-right h4 { font-size: 1.25rem; }
-
-  /* Modal und sonstiges */
-  .modal-info { padding: 1rem; }
-}
-
-/* --- Sehr kleine Geräte (bis 380px) --- */
-@media (max-width: 380px) {
-  .hero h1 {
-    margin-top: 4rem;
-    font-size: 10vw;
-  }
-  .hero-content img { height: 180px; width: 280px; }
-  .hero .cta { padding: 0.5rem 1rem; }
-
-  .aktuelles h2,
-  .ueberuns h2,
-  .team h2 { font-size: 3rem; }
-
-  .ueberuns p { font-size: 0.8rem; }
-  .team-member img { width: 80px; height: 80px; }
-}
-
-/* --- IPAD / MITTLERE TABLET / LAPTOP (ab 768px) --- */
-@media (min-width: 768px) {
-  .aktuelles {
-    height: auto;
-    padding: 3rem 2rem;
-  }
-  .aktuelles h2 { margin-bottom: 1.5rem; }
-  .aktuelles-list { gap: 1.5rem; }
-
-  .aktuelles-card {
-    flex-direction: row;
-    width: 95%;
-    max-width: 95%;
-    padding: 1.5rem;
-    text-align: left;
+  .brand-text {
+    font-size: 18px;
   }
 
-  .aktuelles-card__img {
-    width: 35%;
-    max-width: 300px;
-    height: auto;
-    margin-right: 1.5rem;
+  .nav-cta {
+    padding: 9px 10px;
   }
-  .aktuelles-card__content { text-align: left; }
-  .aktuelles-card__title { font-size: 1.4rem; }
-  .aktuelles-card__description { font-size: 1rem; }
 }
