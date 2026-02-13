@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   if (logo && container) {
     logo.addEventListener('click', (event) => {
       const dart = document.createElement('img');
-      dart.src = 'images/dartpfeil.png';
+      dart.src = './images/dartpfeil.png';
       dart.className = 'flying-dart';
       container.appendChild(dart);
 
@@ -364,7 +364,7 @@ window.addEventListener('load', () => {
     loaderOverlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:#fff; display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999;';
     
     const logo = document.createElement('img');
-    logo.src = 'images/logo.png'; // Pfad angepasst (mit / am Anfang ist sicherer)
+    logo.src = './images/logo.png'; // Pfad angepasst (mit / am Anfang ist sicherer)
     logo.alt = 'Logo';
     logo.id = 'loader-logo';
     logo.style.animation = 'loader-pulse 1.5s infinite';
