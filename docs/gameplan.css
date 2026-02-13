@@ -29,6 +29,18 @@
   box-sizing: border-box;
 }
 
+html {
+  cursor: url('images/dartcursor2_small.cur'), auto;
+  user-select: none;
+  -webkit-user-select: none; 
+  -moz-user-select: none;    
+  -ms-user-select: none;
+}
+
+a, button, .team-member:hover {
+  cursor: url('images/dartpointer2_small.cur'), auto;
+}
+
 body {
   margin: 0;
   background: var(--bg);

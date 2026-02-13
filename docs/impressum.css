@@ -2,6 +2,18 @@
    IMPRESSUM & RECHTLICHES STYLE
 ==================================== */
 
+html {
+  cursor: url('images/dartcursor2_small.cur'), auto;
+  user-select: none;
+  -webkit-user-select: none; 
+  -moz-user-select: none;    
+  -ms-user-select: none;
+}
+
+a, button, .team-member:hover {
+  cursor: url('images/dartpointer2_small.cur'), auto;
+}
+
 /* Container für die Textseite */
 .legal-page {
   padding-top: 140px; /* Platz für die Navbar */
