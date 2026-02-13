@@ -1,0 +1,85 @@
+/* ====================================
+   IMPRESSUM & RECHTLICHES STYLE
+==================================== */
+
+/* Container für die Textseite */
+.legal-page {
+  padding-top: 140px; /* Platz für die Navbar */
+  padding-bottom: 80px;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+.legal-container {
+  max-width: 800px; /* Textspalte nicht zu breit machen -> bessere Lesbarkeit */
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Hauptüberschrift */
+.legal-container h1 {
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--accent); /* Dein Gold-Ton */
+  margin-bottom: 3rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 1rem;
+}
+
+/* Einzelne Abschnitte */
+.legal-block {
+  margin-bottom: 3rem;
+}
+
+/* Zwischenüberschriften */
+.legal-block h2 {
+  font-family: "Oswald", sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.legal-block h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Fließtext */
+.legal-block p {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300; /* Etwas dünner für viel Text */
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+/* Links im Text */
+.legal-block a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.legal-block a:hover {
+  color: var(--accent-hover);
+}
+
+/* Responsive Anpassung */
+@media (max-width: 768px) {
+  .legal-page {
+    padding-top: 100px;
+  }
+  
+  .legal-container h1 {
+    margin-bottom: 2rem;
+  }
+}

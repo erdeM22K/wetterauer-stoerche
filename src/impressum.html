@@ -1,11 +1,127 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impressum</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Impressum - Wetterauer Störche</title>
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="impressum.css">
 </head>
 <body>
-    <h1>Folgt noch, du HUND!</h1>
-</body>
+
+  <header class="site-header">
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a class="brand" href="index.html">
+          <img class="brand-logo" src="/images/logo.png" alt="" aria-hidden="true" />
+          <span class="brand-text">
+            <strong>WETTERAUER</strong><br>STÖRCHE
+          </span>
+        </a>
+
+        <button class="hamburger-toggle" id="hamburger-button" aria-label="Menü öffnen" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        
+        <ul class="nav-links" role="list">
+          <li><a href="index.html#hero">Home</a></li>
+          <li><a href="index.html#aktuelles">Aktuelles</a></li>
+          <li><a href="index.html#ueberuns">Über uns</a></li>
+          <li><a href="index.html#team">Team</a></li>
+          <li><a href="gameplan.html">Spielplan</a></li>
+        </ul>
+
+        <a class="nav-cta" href="contacts.html">Mitglied werden!</a>
+      </div>
+    </nav>
+  </header>
+
+  <div id="smooth-wrapper">
+    <div id="smooth-content">
+      
+      <main class="legal-page">
+        <div class="legal-container">
+          <h1>Impressum</h1>
+
+          <section class="legal-block">
+            <h2>Angaben gemäß § 5 TMG</h2>
+            <p>
+              <strong>Dartclub Wetterau 2016 Beienheim e.V.</strong><br>
+              Am Schützenhaus 1<br>
+              61203 Reichelsheim (Wetterau)
+            </p>
+            <p>
+              <strong>Vertreten durch:</strong><br>
+              Vorname Nachname (1. Vorsitzender)<br>
+              Vorname Nachname (2. Vorsitzender)
+            </p>
+          </section>
+
+          <section class="legal-block">
+            <h2>Kontakt</h2>
+            <p>
+              Telefon: +49 (0) 123 44 55 66<br>
+              E-Mail: <a href="mailto:info@wetterauer-stoerche.de">info@wetterauer-stoerche.de</a>
+            </p>
+          </section>
+
+          <section class="legal-block">
+            <h2>Registereintrag</h2>
+            <p>
+              Eintragung im Vereinsregister.<br>
+              Registergericht: Amtsgericht Friedberg<br>
+              Registernummer: VR 12345
+            </p>
+          </section>
+
+          <section class="legal-block">
+            <h2>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+            <p>
+              Vorname Nachname<br>
+              Musterstraße 1<br>
+              12345 Musterstadt
+            </p>
+          </section>
+
+          <section class="legal-block">
+            <h2>Haftungsausschluss (Disclaimer)</h2>
+            
+            <h3>Haftung für Inhalte</h3>
+            <p>
+              Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+            </p>
+
+            <h3>Haftung für Links</h3>
+            <p>
+              Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+            </p>
+
+            <h3>Urheberrecht</h3>
+            <p>
+              Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.
+            </p>
+          </section>
+
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p>©2025 by Erdem Kardas & Dennis Bezusov</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/wetterauer.stoerche.dv/" target="_blank" rel="noopener">Instagram</a>
+          <a href="impressum.html">Impressum</a>
+          <a href="contacts.html#datenschutz">Datenschutzerklärung</a>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+  <script src="impressum.js"></script> </body>
 </html>

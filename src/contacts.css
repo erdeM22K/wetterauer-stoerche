@@ -253,7 +253,7 @@ textarea {
     grid-template-columns: 1fr;
   }
   .actions {
-    justify-content: flex-start;
+    justify-content: center;
   }
 }
 

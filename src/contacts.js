@@ -1,11 +1,11 @@
 // ============================================================
-// KONTAKTSEITE - HAUPTSKRIPT
+// KONTAKTSEITE - HAUPTSKRIPT (contacts.js)
 // ============================================================
 
 document.addEventListener("DOMContentLoaded", () => {
 
   // ------------------------------------------------------------
-  // 1. GSAP Plugin Registrierung (Sicherheitshalber)
+  // 1. GSAP Plugin Registrierung
   // ------------------------------------------------------------
   if (typeof gsap !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const isExpanded = siteHeader.classList.toggle('menu-open');
       hamburgerButton.setAttribute('aria-expanded', isExpanded);
 
-      // Scrollen verhindern, wenn Menü offen ist
       if (isExpanded) {
         document.body.style.overflow = 'hidden';
       } else {
@@ -33,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     hamburgerButton.addEventListener('click', toggleMenu);
 
-    // Menü schließen, wenn man auf einen Link klickt
     navLinks.addEventListener('click', (e) => {
       if (e.target.tagName === 'A' && siteHeader.classList.contains('menu-open')) {
         toggleMenu();
@@ -42,19 +40,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ------------------------------------------------------------
-  // 3. Datenschutz Modal (Popup)
+  // 3. Datenschutz Modal & Auto-Open Logik
   // ------------------------------------------------------------
-  const openPrivacyBtn = document.getElementById('open-privacy-btn');
   const modal = document.getElementById('privacy-modal');
   const closePrivacyBtn = document.getElementById('close-privacy-btn');
   const backdrop = document.querySelector('.privacy-backdrop');
+  const privacyTriggers = document.querySelectorAll('.open-privacy-trigger, #open-privacy-btn');
 
   const openModal = (e) => {
     if (e) e.preventDefault();
     if (modal) {
       modal.classList.add('active');
       modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden'; // Scrollen der Seite sperren
+      document.body.style.overflow = 'hidden';
     }
   };
 
@@ -62,30 +60,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modal) {
       modal.classList.remove('active');
       modal.setAttribute('aria-hidden', 'true');
-      // Nur entsperren, wenn das Hamburger Menü NICHT offen ist
       if (!siteHeader || !siteHeader.classList.contains('menu-open')) {
         document.body.style.overflow = '';
       }
+      history.replaceState(null, null, ' ');
     }
   };
 
-  if (openPrivacyBtn) openPrivacyBtn.addEventListener('click', openModal);
+  privacyTriggers.forEach(trigger => {
+    trigger.addEventListener('click', openModal);
+  });
+
   if (closePrivacyBtn) closePrivacyBtn.addEventListener('click', closeModal);
   if (backdrop) backdrop.addEventListener('click', closeModal);
 
-  // Schließen mit ESC-Taste
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
       closeModal();
     }
   });
 
+  if (window.location.hash === '#datenschutz') {
+    setTimeout(() => { openModal(); }, 100);
+  }
+
   // ------------------------------------------------------------
   // 4. EmailJS Formular Logik
   // ------------------------------------------------------------
   const form = document.getElementById("contactForm");
 
-  // Nur ausführen, wenn EmailJS geladen ist und das Formular existiert
   if (typeof emailjs !== 'undefined' && form) {
     emailjs.init({ publicKey: "B_UNmss4zAYXa4JKZ" });
 
@@ -101,13 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
         form.reportValidity();
         return;
       }
-
       if (!form.consent.checked) {
         alert("Bitte bestätige die Datenschutzerklärung.");
         return;
       }
 
-      // Daten sammeln
       const vorname = form.vorname.value.trim();
       const nachname = form.nachname.value.trim();
       const fromEmail = form.email.value.trim();
@@ -115,26 +116,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const subject = `Neue Kontaktanfrage: ${vorname} ${nachname}`;
 
       const params = {
-        subject,
-        vorname,
-        nachname,
-        from_email: fromEmail,
-        message,
-        name: `${vorname} ${nachname}`,
-        email: fromEmail,
+        subject, vorname, nachname, from_email: fromEmail, message,
+        name: `${vorname} ${nachname}`, email: fromEmail,
       };
 
-      // Button Status ändern
       const originalText = btn.textContent;
       btn.disabled = true;
       btn.textContent = "Senden …";
 
       try {
-        // Mails senden
         await emailjs.send(SERVICE_ID, TEMPLATE_TO_OWNER, params);
         await emailjs.send(SERVICE_ID, TEMPLATE_AUTO, params);
 
-        // Erfolg anzeigen
         btn.textContent = "Gesendet!";
         btn.classList.add("success");
         form.reset();
@@ -159,8 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ------------------------------------------------------------
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      // Ignoriere den Datenschutz-Link (wird vom Modal-Skript behandelt)
-      if (this.id === 'open-privacy-btn') return;
+      if (this.id === 'open-privacy-btn' || this.classList.contains('open-privacy-trigger')) return;
 
       const targetId = this.getAttribute('href');
       const target = document.querySelector(targetId);
@@ -179,15 +171,48 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // ------------------------------------------------------------
+  // 6. NEU: GSAP Animationen (Links/Rechts Slide-In)
+  // ------------------------------------------------------------
+  const leftSec = document.getElementById("left-section");
+  const rightSec = document.getElementById("right-section");
+
+  // Nur ausführen, wenn wir auf der Kontaktseite sind
+  if (leftSec && rightSec && typeof gsap !== 'undefined') {
+    
+    // Linke Spalte: Kommt von links (-100px) und wird sichtbar
+    gsap.fromTo(leftSec, 
+      { x: -100, opacity: 0 },
+      { 
+        x: 0, 
+        opacity: 1, 
+        duration: 1, 
+        ease: "power2.out",
+        delay: 0.2 // Kurze Verzögerung nach Laden
+      }
+    );
+
+    // Rechte Spalte: Kommt von rechts (+100px) und wird sichtbar
+    gsap.fromTo(rightSec, 
+      { x: 100, opacity: 0 },
+      { 
+        x: 0, 
+        opacity: 1, 
+        duration: 1, 
+        ease: "power2.out",
+        delay: 0.2 // Gleiche Verzögerung, damit sie gleichzeitig kommen
+      }
+    );
+  }
+
 }); // Ende DOMContentLoaded
 
 
 // ============================================================
-// WINDOW LOAD (Warten bis alles, inkl. CSS/Bilder, fertig ist)
+// WINDOW LOAD (Hash Navigation Fallback)
 // ============================================================
 window.addEventListener('load', () => {
-  // Wenn URL einen Hash hat (z.B. contacts.html#team), direkt dorthin scrollen
-  if (window.location.hash) {
+  if (window.location.hash && window.location.hash !== '#datenschutz') {
     const target = document.querySelector(window.location.hash);
     if (target) {
       const headerOffset = 70;
@@ -195,10 +220,7 @@ window.addEventListener('load', () => {
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
       setTimeout(() => {
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       }, 50);
     }
   }
