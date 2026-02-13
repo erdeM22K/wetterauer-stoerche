@@ -58,7 +58,7 @@ html, body {
 }
 
 html {
-  cursor: url('/images/dartcursor2_small.cur'), auto;
+  cursor: url('images/dartcursor2_small.cur'), auto;
   user-select: none;
   -webkit-user-select: none; 
   -moz-user-select: none;    
@@ -66,7 +66,7 @@ html {
 }
 
 a, button, .team-member:hover {
-  cursor: url('/images/dartpointer2_small.cur'), auto;
+  cursor: url('images/dartpointer2_small.cur'), auto;
 }
 
 body {
