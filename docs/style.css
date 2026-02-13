@@ -887,6 +887,18 @@ a {
   .hero-content img { height: 250px; width: 350px; }
   .dart { width: 60vw; left: 20%; }
 
+  .hero-content img.logo-title { 
+    display: block;       /* Zwingt das Logo in eine neue Zeile (unter den Text) */
+    margin: 20px auto;    /* Zentriert es horizontal + gibt Abstand nach oben/unten */
+    height: 140px;        /* Macht es deutlich größer (vorher war es klein) */
+    width: auto;          /* Behält die Proportionen bei */
+  }
+
+  /* Optional: Falls der Titel dadurch zu weit nach oben rutscht, kannst du das Padding hier anpassen */
+  .hero h1 { 
+    padding-top: 2rem; /* Etwas weniger Abstand oben, damit alles drauf passt */
+  }
+
   /* Aktuelles */
   .aktuelles { padding: 2rem 1rem; }
   .aktuelles h2 { font-size: 3rem; }
