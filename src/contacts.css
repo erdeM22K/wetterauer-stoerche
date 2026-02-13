@@ -1,12 +1,10 @@
-/* === Google Fonts laden (zentral) === */
+/* ====================================
+   1) IMPORTS & SETUP
+==================================== */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&family=Poppins:ital,wght@0,400;0,700;0,800;1,700;1,800&display=swap');
 
-
-/* ====================================
-   1) Variablen & Basissetup
-==================================== */
 :root {
-  /* Theme */
+  /* Theme Colors */
   --bg: #111;
   --text: #f5f5f5;
   --muted: #c7c7c7;
@@ -15,16 +13,21 @@
   --accent-hover: #d98b19;
   --focus: #ffffff;
   --radius: 8px;
+  
+  /* Layout Settings */
   --max-width: 1200px;
   --gap: 50px;
 
-  /* Navbar */
+  /* Navbar Settings */
   --nav-bg: #3a0f72;
   --nav-text: #ffffff;
   --nav-height: 72px;
 }
 
-* { box-sizing: border-box; }
+/* --- Global Reset --- */
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -37,14 +40,14 @@ body {
 
 
 /* ====================================
-   2) Kontaktseite – Überschrift & Grid
+   2) KONTAKTSEITE - GRID & LAYOUT
 ==================================== */
 #contact-heading {
   text-align: center;
   font-family: "Oswald", sans-serif;
   text-transform: uppercase;
   font-size: 36px;
-  margin-top: 80px;
+  margin-top: 100px;
   margin-bottom: 40px;
   letter-spacing: 1px;
   color: var(--text);
@@ -57,13 +60,10 @@ body {
   max-width: var(--max-width);
   margin: 0 auto 100px auto;
   padding: 0 40px;
-  align-items: stretch; /* beide Seiten gleich hoch */
+  align-items: stretch;
 }
 
-
-/* ====================================
-   3) Kontaktseite – Linke Spalte
-==================================== */
+/* --- Linke Spalte (Info) --- */
 #left-section {
   display: flex;
   flex-direction: column;
@@ -91,14 +91,18 @@ body {
   margin: 0;
 }
 
-#left-section li + li { margin-top: 8px; }
+#left-section li + li {
+  margin-top: 8px;
+}
 
 #left-section a {
   color: var(--text);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-#left-section a:hover { color: var(--accent); }
+#left-section a:hover {
+  color: var(--accent);
+}
 
 .adresse {
   font-size: 15px;
@@ -107,21 +111,21 @@ body {
 }
 .adresse p { margin: 0 0 4px 0; }
 .adresse p:last-child { margin-bottom: 0; }
+
 .adresse a {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.adresse a:hover { color: var(--accent-hover); }
+.adresse a:hover {
+  color: var(--accent-hover);
+}
 
-
-/* ====================================
-   4) Kontaktseite – Rechte Spalte (Form)
-==================================== */
+/* --- Rechte Spalte (Formular) --- */
 #right-section {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Formular oben, Button unten */
+  justify-content: space-between;
   padding-bottom: 10px;
 }
 
@@ -131,7 +135,6 @@ body {
   flex-grow: 1;
 }
 
-/* Zweispaltige Felder (Vorname / Nachname) */
 .row-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -151,7 +154,7 @@ body {
   margin-bottom: 8px;
 }
 
-/* Inputs */
+/* Inputs & Textarea */
 input[type="text"],
 input[type="email"] {
   background: transparent;
@@ -163,9 +166,10 @@ input[type="email"] {
   outline: none;
   transition: border-color 0.2s ease;
 }
-input:focus { border-color: var(--focus); }
+input:focus {
+  border-color: var(--focus);
+}
 
-/* Textarea */
 textarea {
   background: #d9d9d9;
   color: #111;
@@ -177,7 +181,7 @@ textarea {
   resize: vertical;
 }
 
-/* Datenschutz Checkbox */
+/* Checkbox */
 .consent {
   display: flex;
   align-items: flex-start;
@@ -198,14 +202,11 @@ textarea {
   margin-top: 3px;
 }
 
-
-/* ====================================
-   5) Buttons
-==================================== */
+/* Buttons */
 .actions {
   display: flex;
-  justify-content: center;  /* Button horizontal zentrieren */
-  align-items: flex-end;    /* unten ausrichten */
+  justify-content: center;
+  align-items: flex-end;
   margin-top: auto;
   padding-top: 20px;
 }
@@ -226,24 +227,19 @@ textarea {
   transform: translateY(-2px);
 }
 
-/* Button-Erfolgsanimation */
 .btn.success {
-  background: #1dbf73; /* sattes Grün */
+  background: #1dbf73;
   color: #fff;
   box-shadow: 0 0 15px rgba(29,191,115,0.6);
   transform: scale(1.03);
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-
-/* ====================================
-   6) Kontaktseite – Responsive
-==================================== */
+/* --- Kontaktseite Responsive --- */
 @media (max-width: 900px) {
-  body{
+  body {
     padding-top: 3rem;
   }
-
   #contact-heading {
     font-size: 28px;
     margin-top: 50px;
@@ -253,20 +249,26 @@ textarea {
     gap: 60px;
     padding: 0 20px;
   }
-  .row-2 { grid-template-columns: 1fr; }
-  .actions { justify-content: flex-start; } /* Button linksbündig mobil */
+  .row-2 {
+    grid-template-columns: 1fr;
+  }
+  .actions {
+    justify-content: flex-start;
+  }
 }
 
 
 /* ====================================
-   7) Navbar
+   3) NAVBAR & HEADER (Base Styles)
 ==================================== */
 .site-header {
- background: #3a0f7249;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #3a0f7249;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.014);
-  color: var(--nav-text);
   position: fixed;
   width: 100%;
   top: 0;
@@ -274,7 +276,9 @@ textarea {
   z-index: 100;
 }
 
-.navbar { width: 100%; }
+.navbar {
+  width: 100%;
+}
 
 .nav-inner {
   max-width: var(--max-width);
@@ -287,7 +291,7 @@ textarea {
   gap: 24px;
 }
 
-/* Brand (Logo + Text) */
+/* Brand */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -309,7 +313,7 @@ textarea {
   font-size: 20px;
 }
 
-/* Links mittig */
+/* Desktop Links */
 .nav-links {
   display: flex;
   justify-content: center;
@@ -330,7 +334,7 @@ textarea {
   text-underline-offset: 4px;
 }
 
-/* CTA rechts */
+/* CTA Button */
 .nav-cta {
   background: var(--accent);
   color: #231b08;
@@ -347,32 +351,9 @@ textarea {
   background: #cd8417;
 }
 
-/* Navbar – Responsive */
-@media (max-width: 980px) {
-  .nav-inner {
-    grid-template-columns: 1fr auto;  /* Brand | CTA */
-    grid-template-rows: auto auto;    /* Links in zweite Zeile */
-    height: auto;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    row-gap: 10px;
-  }
-  .nav-links {
-    grid-column: 1 / -1;
-    order: 2;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 16px 24px;
-  }
-}
-@media (max-width: 520px) {
-  .brand-text { font-size: 18px; }
-  .nav-cta { padding: 9px 10px; }
-}
-
 
 /* ====================================
-   8) Footer
+   4) FOOTER
 ==================================== */
 .footer {
   background-color: #000;
@@ -386,23 +367,19 @@ textarea {
   font-weight: bold;
 }
 
+
 /* ====================================
-   9) Hamburger Menü Stile
+   5) RESPONSIVE NAVBAR & HAMBURGER
 ==================================== */
 
-/* 1. Stile für den Hamburger-Button */
+/* Desktop: Hamburger verstecken */
 .hamburger-toggle {
-  display: none; /* Auf Desktop standardmäßig versteckt */
+  display: none;
   background: transparent;
   border: none;
   cursor: pointer;
   padding: 10px;
-  z-index: 1001; /* Stellt sicher, dass er über dem Menü-Hintergrund liegt */
-  
-  /* Positionierung im Grid (wird unten bei < 980px aktiv) */
-  grid-column: 3; /* Rechte Spalte */
-  grid-row: 1;
-  justify-self: end; /* Rechtsbündig in seiner Zelle */
+  z-index: 1001;
 }
 
 .hamburger-toggle .bar {
@@ -410,116 +387,222 @@ textarea {
   width: 25px;
   height: 3px;
   margin: 5px auto;
-  background-color: var(--nav-text, #ffffff); /* Verwendet deine Navbar-Textfarbe */
+  background-color: var(--nav-text, #ffffff);
   transition: all 0.3s ease-in-out;
 }
 
-/* 2. Responsive Logik (ersetzt das bisherige Wrap-Verhalten) */
-@media (max-width: 980px) {
-
-  /* A. Grid anpassen: Brand | Leerraum | Button */
-  /* Dies überschreibt die bestehenden 980px-Regeln für .nav-inner */
+/* --- TABLET & MOBILE (max 1024px) --- */
+@media (max-width: 1024px) {
+  
+  /* 1. Navbar Grid reset */
   .nav-inner {
-    grid-template-columns: auto 1fr auto; 
-    grid-template-rows: auto; /* Zurücksetzen */
-    height: var(--nav-height); /* Höhe wieder festlegen */
-    padding-top: 0; 
-    padding-bottom: 0; 
+    grid-template-columns: auto 1fr auto;
+    height: var(--nav-height);
+    padding-top: 0;
+    padding-bottom: 0;
     row-gap: 0;
   }
 
-  /* B. Hamburger-Button auf Mobilgeräten anzeigen */
+  /* 2. Elemente umschalten */
+  .hamburger-toggle { display: block; }
+  .nav-links, .nav-cta { display: none; }
+
+  /* 3. Button-Position */
   .hamburger-toggle {
-    display: block;
+    grid-column: 3;
+    justify-self: end;
   }
 
-  /* C. Desktop-Links und CTA standardmäßig verstecken */
-  .nav-links,
-  .nav-cta {
-    display: none;
-  }
-  
-  /* D. Bestehende 980px-Regeln für .nav-links zurücksetzen */
-  /* (damit sie nicht mehr wrappen) */
-  .nav-links {
-    grid-column: auto;
-    order: 0;
-    flex-wrap: nowrap;
-    gap: 0;
-  }
-
-  /* 3. Das geöffnete Menü (wenn .menu-open aktiv ist) -- NEUE LOGIK */
-
-  /* A. Mache den GANZEN Header 100% hoch */
+  /* --- GEÖFFNETES MENÜ --- */
   .site-header.menu-open {
-    height: 100vh; /* 100% der Viewport-Höhe */
-    /* Der Blur-Hintergrund von .site-header wird jetzt auf 100vh gestreckt */
+    height: 100vh;
+    background: #3a0f7249;
+    backdrop-filter: blur(15px);
   }
 
-  /* B. Ändere das .nav-inner-Layout, um Inhalt zu verteilen */
   .site-header.menu-open .nav-inner {
     height: 100%;
-    display: flex; /* Überschreibt das Grid-Layout */
-    flex-direction: column;
-    
-    /* NEU: Verteilt die Elemente vertikal */
-    justify-content: space-between; 
-    
-    align-items: center; /* Hält alles horizontal zentriert */
-    
-    /* NEU: Padding oben (für Links) und unten (für CTA) */
-    padding-top: calc(var(--nav-height) + 10rem); 
-    padding-bottom: 3rem; /* Sicherer Abstand zum unteren Rand */
-    box-sizing: border-box; /* Stellt sicher, dass Padding funktioniert */
-    text-shadow: 0 0 15px rgba(217, 139, 25,0.8);
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem; 
+    padding-top: 60px;
+    text-shadow: none;
   }
 
-  /* C. Brand (Logo) absolut positionieren (damit es oben bleibt) */
-  .site-header.menu-open .brand {
-    position: absolute;
-    top: 15px; /* Vertikal zentrieren (anpassen) */
-    left: 24px; /* Wie Desktop-Padding */
-  }
-
-  /* D. Hamburger-Button auch absolut positionieren */
-  .site-header.menu-open .hamburger-toggle {
-    position: absolute;
-    top: 10px; /* Vertikal anpassen */
-    right: 14px; /* Horizontal anpassen (ca. Desktop-Padding) */
-  }
-
-  /* E. Zeige die Links als Menü-Items */
+  /* Links & Button im Menü zeigen */
   .site-header.menu-open .nav-links {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
     align-items: center;
     gap: 2rem;
+    list-style: none;
+    order: 0;
   }
 
-  /* F. Zeige den CTA-Button (wird von space-between nach unten gedrückt) */
   .site-header.menu-open .nav-cta {
-    display: block; 
-    margin-top: 2rem;
+    display: block !important;
+    width: fit-content;
+    font-size: 1.2rem;
     box-shadow: 0 0 15px rgba(255, 206, 132, 0.8);
   }
 
-  /* G. Links im geöffneten Menü (Styling) */
-  .site-header.menu-open .nav-links li {
-      margin: 0;
-  }
   .site-header.menu-open .nav-links a {
-      font-size: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 700;
   }
 
+  /* Fixierung bei offenem Menü */
+  .site-header.menu-open .brand {
+    position: absolute;
+    top: 15px;
+    left: 24px;
+  }
 
-  /* 4. "X"-Animation für den Button (bleibt gleich) */
-  .site-header.menu-open .hamburger-toggle .bar:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+  .site-header.menu-open .hamburger-toggle {
+    position: absolute;
+    top: 10px;
+    right: 14px;
   }
-  .site-header.menu-open .hamburger-toggle .bar:nth-child(2) {
-    opacity: 0;
+
+  /* X-Animation */
+  .site-header.menu-open .hamburger-toggle .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .site-header.menu-open .hamburger-toggle .bar:nth-child(2) { opacity: 0; }
+  .site-header.menu-open .hamburger-toggle .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+}
+
+/* --- KLEINE HANDYS --- */
+@media (max-width: 520px) {
+  .brand-text { font-size: 18px; }
+  .nav-cta { padding: 9px 10px; }
+}
+
+
+/* ====================================
+   6) DATENSCHUTZ MODAL
+==================================== */
+.privacy-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.privacy-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.privacy-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+}
+
+.privacy-content {
+  position: relative;
+  background: #1a1a1a;
+  color: #ddd;
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  z-index: 2001;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+}
+
+.privacy-modal.active .privacy-content {
+  transform: translateY(0);
+}
+
+.close-privacy {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 10;
+}
+.close-privacy:hover {
+  color: var(--accent);
+}
+
+.privacy-body {
+  padding: 40px;
+  overflow-y: auto;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.privacy-body h2 {
+  color: var(--accent);
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-family: "Oswald", sans-serif;
+  text-transform: uppercase;
+}
+
+.privacy-body h3 {
+  color: #fff;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.privacy-body p {
+  margin-bottom: 15px;
+  color: #ccc;
+}
+
+.privacy-body a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* Scrollbar Styles */
+.privacy-body::-webkit-scrollbar {
+  width: 8px;
+}
+.privacy-body::-webkit-scrollbar-track {
+  background: #111;
+}
+.privacy-body::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+.privacy-body::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .privacy-content {
+    width: 95%;
+    max-height: 90vh;
   }
-  .site-header.menu-open .hamburger-toggle .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+  .privacy-body {
+    padding: 25px 20px;
   }
 }
