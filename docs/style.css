@@ -142,9 +142,9 @@ a {
 }
 
 .brand-logo {
-  width: 42px;
+  width: auto;
   height: 42px;
-  border-radius: 50%;
+  border-radius: 25%;
   display: block;
 }
 
