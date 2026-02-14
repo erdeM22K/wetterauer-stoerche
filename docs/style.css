@@ -324,7 +324,7 @@ a {
   opacity: 0; 
 }
 
-/* Call to Action Box */
+/* Call to Action Box (Optimiert) */
 .cta-wrapper {
   display: flex;
   background: #3a0f7249;
@@ -332,39 +332,56 @@ a {
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  width: 50vh;
+  
+  /* Größe basiert auf Höhe, aber mit Limits */
+  width: 50vh;     
   height: 40vh;
+  max-width: 90vw;   /* WICHTIG: Auf Handy nicht breiter als der Screen */
+  min-height: 280px; /* WICHTIG: Mindesthöhe, damit Text nicht abgeschnitten wird */
+  
   margin-left: 5%;
   align-items: center; 
   justify-content: center; 
-  padding: 2rem; 
+  
+  /* Dynamisches Padding: Passt sich an Höhe an */
+  padding: 2vh 2vw; 
+  
   box-sizing: border-box;
   opacity: 0;
+  overflow: hidden; /* Sicherheit: Nichts darf rausgucken */
 }
 
 .cta-wrapper .content {
   display: flex;
   flex-direction: column; 
   align-items: center; 
-  gap: 1.5rem; 
-}
-
-.cta-wrapper .content p {
-  color: white;
-  font-size: 1.5rem;
-  text-align: center;
-  margin: 0;
-  font-weight: 100;
+  /* Der Abstand zwischen Texten schrumpft jetzt mit */
+  gap: 2vh; 
+  width: 100%;
 }
 
 .cta-wrapper .content h3 {
   color: #cd8417;
-  font-size: 1.8rem;
-  width: 200%;
+  /* Dynamische Schrift: Mind. 1.1rem, Ideal 3.5vh, Max 2rem */
+  font-size: clamp(1.1rem, 3.5vh, 2rem);
+  
+  width: 100%; /* KORREKTUR: Vorher war hier 200%, das war der Fehler! */
   text-align: center;
   margin: 0;
   font-style: italic;
   text-shadow: #e0e0e0 1px 1px 0;
+  line-height: 1.2;
+}
+
+.cta-wrapper .content p {
+  color: white;
+  /* Dynamische Schrift für den Fließtext */
+  font-size: clamp(0.85rem, 2.2vh, 1.4rem);
+  text-align: center;
+  margin: 0;
+  font-weight: 100;
+  line-height: 1.4;
+  width: 100%;
 }
 
 .cta {
@@ -373,10 +390,17 @@ a {
   border: none;
   border-radius: 10px;
   font-weight: bold;
-  width: 25vh;
-  height: 8vh;
+  
+  /* Button-Größe passt sich auch an */
+  width: 80%;
+  height: auto;
+  padding: 1.5vh 0; /* Polsterung oben/unten dynamisch */
+  margin-top: 1vh;
+  
   text-align: center;
-  font-size: 1.5rem;
+  /* Schriftgröße im Button dynamisch */
+  font-size: clamp(0.9rem, 2.5vh, 1.5rem);
+  
   display: flex;
   align-items: center;
   justify-content: center;
