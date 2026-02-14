@@ -264,8 +264,7 @@ a {
   line-height: 1.1;
   flex-shrink: 0;
   color: #f1f1f1;
-  /* Complex Text Shadow for 3D effect */
-  text-shadow: #000000 2px 2px 0; 
+  text-shadow: #000000 6px 6px 0; 
 }
 
 .logo-title {
