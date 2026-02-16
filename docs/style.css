@@ -901,113 +901,72 @@ a {
 
 /* --- SMALL MOBILE (max 480px) --- */
 @media (max-width: 480px) {
-  /* General */
+  
+  /* 1. Generelle Anpassungen */
   .site-header .brand-text { font-size: 18px; }
   
-  /* Hero */
-  .hero h1 { font-size: 12vw; padding-top: 4rem; }
-  .hero .cta { margin-top: 2rem; }
-  .hero-content img { height: 250px; width: 350px; }
+  /* 2. TITEL (WETTERAUER STÖRCHE) */
+  .hero h1 { 
+    font-size: 12vw; 
+    padding-top: 4rem; 
+    line-height: 1.1; 
+    margin-bottom: 0;
+  }
+
+  /* 3. LOGO (Der Storch) */
+  .hero-content img.logo-title { 
+    display: block; 
+    margin: 5rem auto 5rem auto;   
+    height: 200px;
+    width: auto; 
+  }
+
+  /* 4. BUTTON WRAPPER (Die Box drumherum) */
+  .cta-wrapper {
+    margin: 0 auto;   
+    padding: 0;       
+    width: 100%;      
+    height: auto;
+    min-height: 0; 
+    background: none; 
+    border: none;     
+    backdrop-filter: none;
+    display: flex;    
+    justify-content: center;
+    align-items: flex-start; 
+  }
+
+  /* Der Button selbst */
+  .hero .cta { 
+    margin-top: 0;
+  }
+
+  /* --- RESTLICHE ANPASSUNGEN (Bleiben gleich) --- */
+  .hero-content img { height: auto; width: auto; } /* Reset für andere Bilder */
   .dart { width: 60vw; left: 20%; }
 
-  .hero-content img.logo-title { 
-    display: block;       /* Zwingt das Logo in eine neue Zeile (unter den Text) */
-    margin: 20px auto;    /* Zentriert es horizontal + gibt Abstand nach oben/unten */
-    height: 140px;        /* Macht es deutlich größer (vorher war es klein) */
-    width: auto;          /* Behält die Proportionen bei */
-  }
-
-  /* Optional: Falls der Titel dadurch zu weit nach oben rutscht, kannst du das Padding hier anpassen */
-  .hero h1 { 
-    padding-top: 2rem; /* Etwas weniger Abstand oben, damit alles drauf passt */
-  }
-
-  /* Aktuelles */
   .aktuelles { padding: 2rem 1rem; }
   .aktuelles h2 { font-size: 3rem; }
   .aktuelles-card__title { font-size: 1.2rem; }
 
-  /* Über uns */
   .ueberuns-left img { width: 300px; height: auto; }
 
-  /* TEAM (Mobile Optimierung: 2 Spalten) */
-  .team { 
-    padding: 2rem 0.5rem; 
-  }
-  
-  .team-content {
-    /* Zwei Spalten, die sich den Platz teilen */
-    grid-template-columns: 1fr 1fr; 
-    gap: 10px; /* Kleinerer Abstand zwischen den Karten */
-    padding: 0;
-  }
+  .team { padding: 2rem 0.5rem; }
+  .team-content { grid-template-columns: 1fr 1fr; gap: 10px; padding: 0; }
+  .team-member:hover { transform: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: #e0e0e0; }
+  .member-image-wrapper { height: auto; }
+  .member-details { padding: 1rem 0.5rem; }
+  .member-header h3 { font-size: 1rem; margin-bottom: 2px; }
+  .member-header .nickname { font-size: 0.8rem; margin-bottom: 8px; }
 
-  .team-member:hover {
-    transform: none; /* Kein Hochhüpfen */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Schatten bleibt normal */
-    border-color: #e0e0e0; /* Rand bleibt grau, wird nicht gold */
-  }
-  
-  .member-image-wrapper { 
-    /* Bildhöhe anpassen, sonst wirken sie zu lang */
-    height: auto; 
-  }
-  
-  .member-details { 
-    padding: 1rem 0.5rem; 
-  }
-
-  /* Schriftgrößen anpassen, damit es passt */
-  .member-header h3 { font-size: 1.1rem; }
-  .info-grid { font-size: 0.8rem; grid-template-columns: 80px 1fr; }
-
-  /* --- OPTIMIERUNG DER TEXT-INFOS (Mobile) --- */
-  
-  .info-grid {
-    /* Links: Nur so breit wie das Wort. Rechts: Der Rest */
-    grid-template-columns: auto 1fr; 
-    
-    /* Kleinerer Text, damit es passt */
-    font-size: 0.75rem; 
-    
-    /* Abstand: Oben/Unten 2px, Rechts/Links 8px */
-    gap: 2px 8px; 
-    
-    /* Vertikal mittig ausrichten */
-    align-items: center; 
-  }
-
-  .info-label {
-    /* Labels (HOMETOWN etc.) etwas kleiner */
-    font-size: 0.65rem; 
-    letter-spacing: 0px; /* Spart Platz */
-  }
-
-  .info-value {
-    /* Werte nach RECHTS schieben -> sieht auf kleinen Karten viel aufgeräumter aus */
-    text-align: right; 
-    
-    /* Falls ein Name sehr lang ist (z.B. langer Wohnort), darf er umbrechen */
-    word-wrap: break-word; 
-    line-height: 1.2; 
-    font-weight: 600;
-  }
-
-  /* Optional: Header (Name) auch etwas kompakter machen */
-  .member-header h3 {
-    font-size: 1rem; 
-    margin-bottom: 2px;
-  }
-  
-  .member-header .nickname {
-    font-size: 0.8rem;
-    margin-bottom: 8px;
-  }
+  .info-grid { grid-template-columns: auto 1fr; font-size: 0.75rem; gap: 2px 8px; align-items: center; }
+  .info-label { font-size: 0.65rem; letter-spacing: 0px; }
+  .info-value { text-align: right; word-wrap: break-word; line-height: 1.2; font-weight: 600; }
 }
 
 /* --- TINY SCREENS (max 380px) --- */
 @media (max-width: 380px) {
   .hero h1 { font-size: 10vw; }
-  .hero-content img { height: 180px; width: 280px; }
+  .hero-content img.logo-title { height: 110px; margin: 15px auto 20px auto; } /* Auf Mini-Handys etwas enger */
   .team-member h3 { font-size: 1.2rem; }
 }

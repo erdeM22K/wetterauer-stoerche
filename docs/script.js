@@ -404,7 +404,7 @@ window.addEventListener('load', () => {
             gsap.fromTo(".logo-title", { opacity: 0 }, {
               opacity: 1, y: 0, ease: "power2.out",
               onComplete: () => {
-                gsap.fromTo(".cta-wrapper", { y: -200, opacity: 0 }, {
+                gsap.fromTo(".cta-wrapper", { y: 0, opacity: 1 }, {
                   opacity: 1, y: 0, ease: "power2.out",
                   onComplete: () => ScrollTrigger.refresh()
                 });
