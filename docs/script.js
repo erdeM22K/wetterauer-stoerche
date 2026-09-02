@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let images = [];
     let currentIndex = 0;
 
-    fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhkv0mLnP_wSeC9n4yrgF9_QINqGDdYnSfC2nC-cNrggjqETlrSCLOT48cgxPtGMmTbuLYieHboahxXZL5lrOcup5gnpcf-PnVagQx4vXxNqc1qBdxNte2hwriwmMUDTIKmU14PNycBcckGU0iPIEgdnXfcP3SQfrlSQ0-pDBn9ML5vbcBf3wXveZdDyQ2KAtEjKLhCIbXmO8vV7GSLNwNoWWQpsGFAyk1SVguHPXgUVpcC2CATtCO-n5MRmm800s2aZaYcVJzBIMKcA26Bc85HtZm6Dg&lib=MbIlc9TiEEKieF6w4ibl9dJ2Ei9Gn_agv")
+    fetch("https://script.google.com/macros/s/AKfycbzkTIDdI2lMaI4hL-ICjjgYgVuwu3pLydRE4ttSAkb3GfA1ft7d8PRSOCQo8ZL0-Q4X/exec")
       .then(res => res.json())
       .then(data => {
         images = data
@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // 6. AKTUELLES - GOOGLE SHEETS
   // ------------------------------------------------------------
   (async function() {
-    const API_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhkv0mLnP_wSeC9n4yrgF9_QINqGDdYnSfC2nC-cNrggjqETlrSCLOT48cgxPtGMmTbuLYieHboahxXZL5lrOcup5gnpcf-PnVagQx4vXxNqc1qBdxNte2hwriwmMUDTIKmU14PNycBcckGU0iPIEgdnXfcP3SQfrlSQ0-pDBn9ML5vbcBf3wXveZdDyQ2KAtEjKLhCIbXmO8vV7GSLNwNoWWQpsGFAyk1SVguHPXgUVpcC2CATtCO-n5MRmm800s2aZaYcVJzBIMKcA26Bc85HtZm6Dg&lib=MbIlc9TiEEKieF6w4ibl9dJ2Ei9Gn_agv';
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzkTIDdI2lMaI4hL-ICjjgYgVuwu3pLydRE4ttSAkb3GfA1ft7d8PRSOCQo8ZL0-Q4X/exec';
     const container = document.getElementById('aktuelles-list');
     if (!container) return;
 
