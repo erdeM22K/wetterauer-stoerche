@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
               currentIndex = nextIndex;
             }
           });
-        }, 3000);
+        }, 6000);
       })
       .catch(err => console.error("Fehler beim Laden der Bilder:", err));
   }
