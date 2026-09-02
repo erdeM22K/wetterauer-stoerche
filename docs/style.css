@@ -48,6 +48,23 @@ html, body {
   left: 0;
   z-index: 0;
 }
+/* Social Icons Wrapper im Hero-Bereich */
+.social-icons-wrapper {
+  display: flex;
+  justify-content: flex-start; /* Ändere zu 'center', falls sie mittig sein sollen */
+  gap: 15px; /* Abstand zwischen den beiden Logos */
+  margin-top: 20px; /* Abstand nach oben zum CTA-Wrapper */
+}
+
+.social-icon img {
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Kleiner Hover-Effekt (die Logos werden minimal größer) */
+.social-icon:hover img {
+  transform: scale(1.1);
+}
 
 /* 3. Sicherheitshalber für den Header */
 .site-header {
