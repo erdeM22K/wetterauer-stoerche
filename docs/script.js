@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           const nextSrc = images[nextIndex];
 
           gsap.to(teamFoto, {
-            duration: 0.5,
+            duration: 5,
             x: -100,
             opacity: 0,
             ease: "power2.in",
@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
               teamFoto.src = nextSrc;
               gsap.fromTo(teamFoto,
                 { x: 100, opacity: 0 },
-                { duration: 0.5, x: 0, opacity: 1, ease: "power2.out" }
+                { duration: 5, x: 0, opacity: 1, ease: "power2.out" }
               );
               currentIndex = nextIndex;
             }
