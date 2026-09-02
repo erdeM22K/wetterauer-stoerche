@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
               teamFoto.src = nextSrc;
               gsap.fromTo(teamFoto,
                 { x: 100, opacity: 0 },
-                { duration: 5, x: 0, opacity: 1, ease: "power2.out" }
+                { duration: 0.5, x: 0, opacity: 1, ease: "power2.out" }
               );
               currentIndex = nextIndex;
             }
