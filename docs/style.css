@@ -51,9 +51,19 @@ html, body {
 /* Social Icons Wrapper im Hero-Bereich */
 .social-icons-wrapper {
   display: flex;
-  justify-content: flex-start; /* Ändere zu 'center', falls sie mittig sein sollen */
-  gap: 15px; /* Abstand zwischen den beiden Logos */
-  margin-top: 20px; /* Abstand nach oben zum CTA-Wrapper */
+  justify-content: center;
+  align-items: center;
+  gap: 20px;       /* Abstand zwischen Instagram und WhatsApp */
+  width: 100%;
+  margin-top: 5px; /* Minimaler Abstand zum Button */
+}
+
+/* WICHTIG: Die Spezifität (.hero-content ...) schützt vor Verzerrungen */
+.hero-content .social-icons-wrapper .social-icon img {
+  width: 40px !important;  
+  height: 40px !important;
+  object-fit: contain;
+  transition: transform 0.2s ease;
 }
 
 .social-icon img {
