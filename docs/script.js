@@ -176,7 +176,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           const nextSrc = images[nextIndex];
 
           gsap.to(teamFoto, {
-            duration: 5,
+            duration: 0.5,
             x: -100,
             opacity: 0,
             ease: "power2.in",
@@ -189,7 +189,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
               currentIndex = nextIndex;
             }
           });
-        }, 3000);
+        }, 10000);
       })
       .catch(err => console.error("Fehler beim Laden der Bilder:", err));
   }
